@@ -1,0 +1,26 @@
+{
+  "name": "genesis-task",
+  "version": "1.0.0",
+  "description": "Test task for Genesis (gen.tech)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JelayDark/genesis-task.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JelayDark/genesis-task/issues"
+  },
+  "homepage": "https://github.com/JelayDark/genesis-task#readme",
+  "devDependencies": {
+    "bootstrap-sass": "^3.3.7",
+    "gulp": "^3.9.1",
+    "gulp-clean-css": "^3.7.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^3.1.0"
+  }
+}
