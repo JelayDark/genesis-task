@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
     <link rel="stylesheet" href="styles/dist/newmain.min.css">
     <!--<script src="js/select-styling.js" async></script>-->
-    <script src="js/range-styling.js" async></script>
+    <script src="js/dist/script.js" async></script>
     <title>Eugeniy Tulyakov | TestTask | Genesis</title>
 </head>
 <body>
@@ -105,7 +105,7 @@
                 </div>
                     <form action="#" class="row form-search">
                         <div class="row"></div>
-                        <div class="col-lg-3">
+                        <div class="col-lg-2">
                             <select name="gender" id="gender">
                                 <option value="Девушку">Девушку</option>
                                 <option value="Парня">Парня</option>
@@ -118,9 +118,20 @@
                                 </ul>
                             </div>
                         </div>
-                        <div class="col-lg-3">
-                            <input type="text">
+                        <!-- Autocompleter START -->
+                       
+                        <div class="col-lg-4">
+                            <div class="wrapper-city">
+                                <input type="text" id="from" autocomplete="on">
+                                <span class="clear">x</span>
+                                <ul class="cityresult">
+                                    
+                                </ul>
+                            </div>
                         </div>
+
+                        <!-- Autocompleter END -->
+
                         <div class="col-lg-3">
                             <input type="range" id="year-min">
                             <input type="range" id="year-max">
@@ -131,11 +142,6 @@
                                 </div>
                             </div>
                         </div>
-
-                        <!-- Range Start -->
-                        <!-- Range End -->
-
-
 
                         <div class="col-lg-3">
                             <button type="submit" class="btn btn-primary">Найти</button>

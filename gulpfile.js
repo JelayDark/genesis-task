@@ -22,14 +22,18 @@ gulp.task('sass:watch', () => {
 });
 
 gulp.task('babel', () => {
-    return gulp.src('./js/src/*.js')
+    return gulp.src('./js/autocompleter.js')
 		.pipe(sourcemaps.init())
 		.pipe(babel({
-			presets: ['es-2015']
+			presets: ['es2015']
 		}))
 		.pipe(concat('script.js'))
 		.pipe(sourcemaps.write('.'))
 		.pipe(gulp.dest('./js/dist'))
-})
+});
 
-gulp.task('default', ['build-sass', 'sass:watch']);
+gulp.task('js:watch', () => {
+    gulp.watch('./js/*.js', ['babel']); 
+});
+
+gulp.task('default', ['build-sass', 'sass:watch', 'js:watch']);
