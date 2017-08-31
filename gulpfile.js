@@ -6,7 +6,7 @@ let rename = require('gulp-rename');
 let cleanCSS = require('gulp-clean-css');
 
 gulp.task('build-sass', () => {
-    return gulp.src('./styles/sass/main.scss')
+    return gulp.src('./styles/sass/newmain.scss')
     .pipe(sass().on('error', sass.logError))
     .pipe(cleanCSS())
     .pipe(rename({suffix: '.min'}))

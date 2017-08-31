@@ -4,19 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles/dist/main.min.css">
     <title>Eugeniy Tulyakov | TestTask | Genesis</title>
 </head>
 <body>
-    <header>
-        <nav>
-            <img src="image/logo.png" alt="logo">
-            <ul>
-                <li>Поиск</li>
-                <li>Мои переписки</li>
-                <li>Избранное</li>
-                <li>Кто смотрел</li>
+    <header class="main-head container">
+        <nav class="row">
+            <div class="logotype col-sm-10 col-md-2 col-lg-2"></div>
+            <!--<img src="images/logo.png" alt="logo" class="col-sm-10 col-md-2 col-lg-2 ">-->
+            <ul class="menu col-lg-5">
+                <li><a href="#"> Поиск </a></li>
+                <li><a href="#"> Мои переписки </a></li>
+                <li><a href="#"> Избранное </a></li>
+                <li><a href="#"> Кто смотрел </a></li>
             </ul>
-            <aside>
+            <aside class="col-lg-5">
                 <a href="#">Премиум</a> <!-- Попап -->
                 <span>&#9990;</span> <!-- Заменить на info. Всплывающая подсказка -->
                 <a href="#">1000 кредитов</a> <!-- Попап тот же -->
@@ -25,9 +28,9 @@
             </aside>
         </nav>
 
-        <section>
-            <ul>
-                <li>
+        <section class="row">
+            <ul class="">
+                <li class="col-lg-4">
                     <figure><img src="baby1.png" alt="baby1"></figure>
                 </li>
                 <li>
@@ -67,7 +70,14 @@
                 <input type="text">
                 <input type="range" min="18" max="50" step="1">
                 <button type="submit">Найти</button>
+                <div>
+                    <details>
+                        <summary><span>Расширенный поиск \f091;</span></summary>
+                        <span>Открываемый тегом  текст</span>
+                    </details>
+                </div>
             </form>
+            
         </section>
 
         <section>
