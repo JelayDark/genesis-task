@@ -1,20 +1,35 @@
 'use strict';
 
-let gulp = require('gulp');
-let sass = require('gulp-sass');
-let rename = require('gulp-rename');
-let cleanCSS = require('gulp-clean-css');
+const gulp = require('gulp');
+const sass = require('gulp-sass');
+const rename = require('gulp-rename');
+const cleanCSS = require('gulp-clean-css');
+const sourcemaps = require('gulp-sourcemaps');
+const babel = require('gulp-babel');
+const concat = require('gulp-concat');
+
 
 gulp.task('build-sass', () => {
     return gulp.src('./styles/sass/newmain.scss')
-    .pipe(sass().on('error', sass.logError))
-    .pipe(cleanCSS())
-    .pipe(rename({suffix: '.min'}))
-    .pipe(gulp.dest('./styles/dist'));
+            .pipe(sass().on('error', sass.logError))
+            .pipe(cleanCSS())
+            .pipe(rename({suffix: '.min'}))
+            .pipe(gulp.dest('./styles/dist'));
 });
 
 gulp.task('sass:watch', () => {
     gulp.watch('./styles/**/*.scss', ['build-sass']);
 });
+
+gulp.task('babel', () => {
+    return gulp.src('./js/src/*.js')
+		.pipe(sourcemaps.init())
+		.pipe(babel({
+			presets: ['es-2015']
+		}))
+		.pipe(concat('script.js'))
+		.pipe(sourcemaps.write('.'))
+		.pipe(gulp.dest('./js/dist'))
+})
 
 gulp.task('default', ['build-sass', 'sass:watch']);

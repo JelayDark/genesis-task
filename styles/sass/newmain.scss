@@ -150,6 +150,7 @@ main {
             }
             .dropdown-select {
                 position: absolute;
+                z-index: 9999;
                 top:31px;
                 width: 130px;
                 height: 60px;
@@ -174,58 +175,48 @@ main {
                 }
             }
         }
-        /*
-        .wrapper {
-            background: radial-gradient(#C5E1A5, #7CB342);
-            display: flex;
-            height: 100vh;
-            #gender {
-                display: none;
-            }
-            .style-select {
-                width: 170px;
-            }
-            .list-select {
-                width: 100%;
-                label {
-                    display: block;
-                    width: 100%;
-                    padding: 10px;
-                    background-color: #555;
-                    color: #ddd;
-                    border-bottom: 1px solid #888;
-                    transition: .2s linear;
-                    cursor: pointer; 
+        #year-max, #year-min {
+            display: none;
+        }
+        .wrapper-range {
+            .range {
+                border-radius: 5px;
+                background: #E0E0E0;
+                background: -moz-linear-gradient(left top, #E0E0E0, #EEEEEE) repeat scroll 0 0 transparent;
+                background: -webkit-gradient(linear, left top, right bottom, from(#E0E0E0), to(#EEEEEE));
+                background: linear-gradient(left top, #E0E0E0, #EEEEEE);
+                width: 300px;
+                height: 2px;
+                // margin: 5px;
+                position: relative;
+                .thumb {
+                    // display: inline-block;
+                    position: absolute;
+                    width: 12px;
+                    height: 12px;
+                    border-radius: 50%;
+                    position: relative;
+                    left: 0px;
+                    top: -5px;
+                    background: $blue;
+                    cursor: pointer;
                     &:hover {
-                        background-color: #4DD0E1;
-                        color: #fff;
+                        background: blue;
+                    }
+                    .years {
+                        position: absolute;
+                        top: 13px;
+                        left: -3px;
                     }
                 }
-            }
-            .select-display {
-                width: 100%;
-                background-color: #333;
-                color: #fff;
-                border-top-left-radius: 3px;
-                border-top-right-radius: 3px;
-                padding: 10px; 
-                display: flex;
-                justify-content: space-between;
-                cursor: pointer;
-                transition: .2s linear;
-                &:hover {
-                    opacity: .95;
+                #thumb-max {
+                    margin-top: -12px;
+                    left: 25px;
                 }
             }
-            .select-icon {
-                transition: .2s linear;
-                user-select: none;
-            }
-            .select-icon-on {
-                transform: rotate(180deg);
-            }
+
         }
-        */
+        
     }
 
     .menu-switcher {
