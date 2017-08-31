@@ -132,6 +132,100 @@ main {
 
     .form-search{
         padding: 25px 0;
+        #gender {
+            display: none;
+        }
+        .wrapper-select {
+            position: relative;
+            span {
+                padding-left: 10px;
+                display: block;
+                width: 130px;
+                color: #333;
+                font-size: 16px;
+                font-weight: 400;
+                line-height: 30px;
+                border-bottom: 1px solid gainsboro;
+                cursor: pointer;
+            }
+            .dropdown-select {
+                position: absolute;
+                top:31px;
+                width: 130px;
+                height: 60px;
+                overflow: hidden;
+                transition: height 2s;
+                color: #333;
+                // border-radius: 0 0 5px 5px;
+
+                &.collapsed {
+                    height: 0;
+                }
+
+                .select-item {
+                    cursor: pointer;
+                    padding-left: 10px;
+                    border-bottom: 1px solid gainsboro;
+                    background-color: #f0f0f0;
+                    &:hover {
+                        background-color: $blue;
+                        color: #fff;
+                    }
+                }
+            }
+        }
+        /*
+        .wrapper {
+            background: radial-gradient(#C5E1A5, #7CB342);
+            display: flex;
+            height: 100vh;
+            #gender {
+                display: none;
+            }
+            .style-select {
+                width: 170px;
+            }
+            .list-select {
+                width: 100%;
+                label {
+                    display: block;
+                    width: 100%;
+                    padding: 10px;
+                    background-color: #555;
+                    color: #ddd;
+                    border-bottom: 1px solid #888;
+                    transition: .2s linear;
+                    cursor: pointer; 
+                    &:hover {
+                        background-color: #4DD0E1;
+                        color: #fff;
+                    }
+                }
+            }
+            .select-display {
+                width: 100%;
+                background-color: #333;
+                color: #fff;
+                border-top-left-radius: 3px;
+                border-top-right-radius: 3px;
+                padding: 10px; 
+                display: flex;
+                justify-content: space-between;
+                cursor: pointer;
+                transition: .2s linear;
+                &:hover {
+                    opacity: .95;
+                }
+            }
+            .select-icon {
+                transition: .2s linear;
+                user-select: none;
+            }
+            .select-icon-on {
+                transform: rotate(180deg);
+            }
+        }
+        */
     }
 
     .menu-switcher {
