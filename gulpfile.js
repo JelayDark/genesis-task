@@ -10,7 +10,7 @@ const concat = require('gulp-concat');
 
 
 gulp.task('build-sass', () => {
-    return gulp.src('./styles/sass/media480.scss')
+    return gulp.src('./styles/sass/media768.scss')
             .pipe(sass().on('error', sass.logError))
             .pipe(cleanCSS())
             .pipe(rename({suffix: '.min'}))

@@ -1,5 +1,5 @@
 @media(min-width: 480px) {
-.logo-wrapper {
+    .logo-wrapper {
         text-align: center;
         background: rgba(256,256,256,.8);
         box-shadow: -1px 2px 1px rgba(0,0,0,0.05);
@@ -110,11 +110,6 @@
         }
     }
 
-    // h1 {
-    //     margin-top: -10px;
-    // }
-
-
     .menu-switcher {
         max-width: 500px;
         margin: 0 auto;
@@ -179,16 +174,9 @@
 
     }
 
-    
+        
     .responsibility {
         display: none;
     }
-
-
-
-
-
-
-
 
 }
