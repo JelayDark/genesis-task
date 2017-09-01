@@ -333,6 +333,8 @@ main {
                 }
             }
         }
+
+        @extend .clearfix;
     }
 
     .list-result {
