@@ -36,4 +36,4 @@ gulp.task('js:watch', () => {
     gulp.watch('./js/src/*.js', ['babel']); 
 });
 
-gulp.task('default', ['build-sass', 'sass:watch', 'js:watch']);
+gulp.task('default', ['build-sass', 'sass:watch', 'babel', 'js:watch']);

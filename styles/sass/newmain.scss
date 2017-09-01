@@ -357,6 +357,7 @@ main {
                 box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
                 margin: 0;
                 padding: 0;
+                overflow: hidden;
                 .photo {
                     height: 270px;
                     width: 270px;
@@ -395,6 +396,9 @@ main {
                         // &:hover {
                         //     background-color: #000;
                         // }
+                        &-no {
+                            display: none;
+                        }
                     }
                 }
 
@@ -422,6 +426,18 @@ main {
                 .info {
                     p {
                         margin: 0;
+                        line-height: 30px;
+                        .online {
+                            width: 10px;
+                            height: 10px;
+                            display: inline-block;
+                            background-color: #01f501;
+                            border-radius: 50%;
+                            margin: 0 0 1px 5px;
+                            &-no {
+                                display: none;
+                            }
+                        }
                     }
                     padding: 10px;
                     color: $blue;
@@ -447,7 +463,8 @@ main {
             .page-num {
                 float: left;
                 padding: 5px;
-                a {
+                a, span {
+                    cursor: pointer;
                     display: block;
                     width: 30px;
                     line-height: 30px;
@@ -459,6 +476,11 @@ main {
                         background-color: $blue;
                         color: #fff;
                     }
+                    &.active {
+                        background-color: $blue;
+                        color: #fff;
+                    }
+                    
                 }
             }
         }
