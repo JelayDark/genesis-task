@@ -1,4 +1,4 @@
-@media(min-width: 768px) {
+@media(min-width: 1025px) {
     $gray: #f0f0f0;
     $color-text: #333;
     $blue: #376cf8;
@@ -161,8 +161,8 @@
                 margin: 0;
                 display: inline-block;
                 &:last-child {
-                    width: 100%;
-                    text-align: center;
+                    width: auto;
+                    // text-align: center;
                 }
             }
 
@@ -188,7 +188,7 @@
             }
             .wrapper-select {
                 position: relative;
-                margin: 0 40px 40px 0;
+                // margin: 0 40px 40px 0;
                 span {
                     // padding-left: 10px;
                     display: block;
@@ -374,7 +374,7 @@
                 float: none;
                 margin: 0;
                 display: inline-block;
-                width: 32%;
+                width: 24%;
                 max-width: 270px;
                 .result {
                     // width: 270px;
@@ -522,32 +522,22 @@
     footer{
         padding: 30px 0;
         .menu-bottom {
-            margin-bottom: 20px;
-            width: 100%;
-            text-align: justify;
-            &:after {
-                /*Для растяжения по длине*/
-                content: "";
-                display: inline-block;
-                width: 100%;
-                height: 0;
-            }
-            .menu-item {
-                float: none;
-                margin: 0;
-                display: inline-block;
-                a {
-                    color: #777;
-                    line-height: 30px;
-                    font-size: 14px;
-                    font-weight: 500px;
-                    &:hover {
-                        color: $blue;
-                    }
-                } 
-            }
-            @extend .clearfix;
+        margin-bottom: 20px;
+        .menu-item {
+            float: left;
+            margin-right: 30px;
+            a {
+                color: #777;
+                line-height: 30px;
+                font-size: 14px;
+                font-weight: 500px;
+                &:hover {
+                    color: $blue;
+                }
+            } 
         }
+        @extend .clearfix;
+    }
 
         .copyright {
             color: #777;

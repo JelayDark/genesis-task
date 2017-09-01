@@ -207,7 +207,9 @@ ready(() => {
     const sliderFirstLine = document.getElementsByClassName('list-result')[0];
     // const sliderSecondLine = document.getElementsByClassName('list-result')[1];
     const pagNav = document.getElementsByClassName('pag-nav')[0];
-    const onPageMax = 8;
+    let onPageMax = 8;
+    console.log(window.innerWidth);
+    // if (window.innerWidth);
     let pageNow = 0;
 
     const pagDrow = (pageCount) => {

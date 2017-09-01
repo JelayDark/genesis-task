@@ -355,6 +355,8 @@ ready(function () {
     // const sliderSecondLine = document.getElementsByClassName('list-result')[1];
     var pagNav = document.getElementsByClassName('pag-nav')[0];
     var onPageMax = 8;
+    console.log(window.innerWidth);
+    // if (window.innerWidth);
     var pageNow = 0;
 
     var pagDrow = function pagDrow(pageCount) {
