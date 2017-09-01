@@ -199,6 +199,16 @@ var girls = [{
     "isTop": true
 }, {
     "gender": "Девушка",
+    "name": "Аня",
+    "photo": "anya",
+    "age": 18,
+    "city": "Ростов-на-Дону, Россия",
+    "isFavorite": false,
+    "isOnline": true,
+    "howManyPh": 145,
+    "isTop": true
+}, {
+    "gender": "Девушка",
     "name": "Анжелика",
     "photo": "anjelika",
     "age": 27,
