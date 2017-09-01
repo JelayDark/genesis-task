@@ -22,7 +22,7 @@ gulp.task('sass:watch', () => {
 });
 
 gulp.task('babel', () => {
-    return gulp.src('./js/autocompleter.js')
+    return gulp.src('./js/src/*.js')
 		.pipe(sourcemaps.init())
 		.pipe(babel({
 			presets: ['es2015']
@@ -33,7 +33,7 @@ gulp.task('babel', () => {
 });
 
 gulp.task('js:watch', () => {
-    gulp.watch('./js/*.js', ['babel']); 
+    gulp.watch('./js/src/*.js', ['babel']); 
 });
 
 gulp.task('default', ['build-sass', 'sass:watch', 'js:watch']);
