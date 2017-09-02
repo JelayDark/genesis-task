@@ -7,6 +7,7 @@ const cleanCSS = require('gulp-clean-css');
 const sourcemaps = require('gulp-sourcemaps');
 const babel = require('gulp-babel');
 const concat = require('gulp-concat');
+const uglify = require('gulp-uglifyjs');
 
 
 gulp.task('build-sass', () => {
@@ -28,6 +29,8 @@ gulp.task('babel', () => {
 			presets: ['es2015']
 		}))
 		.pipe(concat('script.js'))
+        .pipe(uglify())
+        .pipe(rename({suffix: '.min'}))
 		.pipe(sourcemaps.write('.'))
 		.pipe(gulp.dest('./js/dist'))
 });
