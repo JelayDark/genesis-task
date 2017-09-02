@@ -79,18 +79,19 @@
         background-color: $gray;
         
         .all-girls {
-            width: 100%;
-            text-align: justify;
+            // width: 100%;
+            // text-align: justify;
             padding: 15px 0;
             height: 160px;
             overflow: hidden;
-            &:after {
-                /*Для растяжения по длине*/
-                content: "";
-                display: inline-block;
-                width: 100%;
-                height: 0;
-            }
+            @include forStretch();
+            // &:after {
+            //     /*Для растяжения по длине*/
+            //     content: "";
+            //     display: inline-block;
+            //     width: 100%;
+            //     height: 0;
+            // }
             .girl-top {
                 float: none;
                 margin-bottom: 15px;
