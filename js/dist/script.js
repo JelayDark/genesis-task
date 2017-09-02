@@ -390,25 +390,64 @@ ready(function () {
     var formSearchButton = document.getElementsByClassName('button-search')[0];
 
     formSearchButton.onclick = function (e) {
+        //SEARCHING GIRLS
         e.preventDefault();
         var valueCity = document.querySelector('input[type=text]').getAttribute('value');
         var valueGender = document.querySelector('select').value;
         var valueAgeMin = document.getElementById('year-min').value;
         var valueAgeMax = document.getElementById('year-max').value;
-        console.log(valueCity, valueGender, valueAgeMax, valueAgeMin);
+        // console.log(valueCity, valueGender, valueAgeMax, valueAgeMin);
         girls = girls.filter(function (girl) {
             if (valueGender === girl.gender && valueCity === girl.city && girl.age <= valueAgeMax && girl.age >= valueAgeMin) {
-                console.log(girl);
+                // console.log(girl);
                 return girl;
             }
         });
-        console.log(girls);
+        // console.log(girls);
 
         sliderFirstLine.innerHTML = '';
         pageCount = Math.ceil(girls.length / onPageMax) - 1;
         for (var i = 0 + pageNow * onPageMax; i < onPageMax + pageNow * onPageMax; i++) {
             sliderFirstLine.innerHTML += doList(girls[i]);
         }
+
+        pageNow = 0;
+        pagDrow(pageNow);
+    };
+
+    var isOnlineButton = document.getElementsByClassName('menu-switcher')[0].children[0];
+    isOnlineButton.onclick = function (e) {
+        e.preventDefault();
+        girls = girls.filter(function (girl) {
+            if (girl.isOnline === true) return girl;
+        });
+        pageCount = Math.ceil(girls.length / onPageMax) - 1;
+        showList();
+        pageNow = 0;
+        pagDrow(pageNow);
+    };
+
+    var isPopularButton = document.getElementsByClassName('menu-switcher')[0].children[2];
+    isPopularButton.onclick = function (e) {
+        e.preventDefault();
+        girls = girls.filter(function (girl) {
+            if (girl.isFavorite === true || girl.isTop === true) return girl;
+        });
+
+        pageCount = Math.ceil(girls.length / onPageMax) - 1;
+        showList();
+
+        pageNow = 0;
+        pagDrow(pageNow);
+    };
+
+    var goNew = document.getElementsByClassName('menu-switcher')[0].children[1];
+    goNew.onclick = function (e) {
+        e.preventDefault();
+        girls = initialGirls;
+
+        pageCount = Math.ceil(girls.length / onPageMax) - 1;
+        showList();
 
         pageNow = 0;
         pagDrow(pageNow);

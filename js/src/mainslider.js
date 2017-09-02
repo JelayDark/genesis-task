@@ -355,20 +355,20 @@ ready(() => {
     //////SEARCHING
     const formSearchButton = document.getElementsByClassName('button-search')[0];
 
-    formSearchButton.onclick = (e) => {
+    formSearchButton.onclick = (e) => { //SEARCHING GIRLS
         e.preventDefault();
         const valueCity = document.querySelector('input[type=text]').getAttribute('value');
         const valueGender = document.querySelector('select').value;
         const valueAgeMin = document.getElementById('year-min').value;
         const valueAgeMax = document.getElementById('year-max').value;
-        console.log(valueCity, valueGender, valueAgeMax, valueAgeMin);
+        // console.log(valueCity, valueGender, valueAgeMax, valueAgeMin);
         girls = girls.filter(girl => {
             if (valueGender === girl.gender && valueCity === girl.city && girl.age <= valueAgeMax && girl.age >= valueAgeMin) {
-                console.log(girl);
+                // console.log(girl);
                 return girl;
             }
         });
-        console.log(girls);
+        // console.log(girls);
 
         sliderFirstLine.innerHTML = '';
         pageCount = Math.ceil(girls.length / onPageMax) - 1;
@@ -380,5 +380,46 @@ ready(() => {
         pagDrow(pageNow);
 
     }
+
+    const isOnlineButton = document.getElementsByClassName('menu-switcher')[0].children[0];
+    isOnlineButton.onclick = (e) => {
+        e.preventDefault();
+        girls = girls.filter(girl => {
+            if (girl.isOnline === true) return girl;
+        })
+        pageCount = Math.ceil(girls.length / onPageMax) - 1;
+        showList();
+        pageNow = 0;
+        pagDrow(pageNow);
+    }
+
+    const isPopularButton = document.getElementsByClassName('menu-switcher')[0].children[2];
+    isPopularButton.onclick = (e) => {
+        e.preventDefault();
+        girls = girls.filter(girl => {
+            if (girl.isFavorite === true || girl.isTop === true) return girl;
+        })
+
+        pageCount = Math.ceil(girls.length / onPageMax) - 1;
+        showList();
+
+        pageNow = 0;
+        pagDrow(pageNow);
+    }
+
+    const goNew = document.getElementsByClassName('menu-switcher')[0].children[1];
+    goNew.onclick = (e) => {
+        e.preventDefault();
+        girls = initialGirls;
+
+        pageCount = Math.ceil(girls.length / onPageMax) - 1;
+        showList();
+
+        pageNow = 0;
+        pagDrow(pageNow);
+    }
+    
+
+
 
 })
