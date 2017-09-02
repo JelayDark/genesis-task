@@ -12,11 +12,11 @@
     .info-ico, .arrow-down
     { display: inline-block; background: url('../../images/icons/sprite.png') no-repeat; overflow: hidden; text-indent: -9999px; text-align: left; }
     
-    .totop { background-position: -0px -0px; width: 50px; height: 50px; }
+    .totop { background-position: -0px -0px; width: 50px; height: 50px; margin-bottom: -2px;}
     .camera { background-position: -0px -50px; width: 21px; height: 17px; margin-bottom: -2px;}
-    .mail { background-position: -21px -50px; width: 20px; height: 15px; }
-    .star-fullwhite { background-position: -21px -65px; width: 19px; height: 18px; }
-    .star-white { background-position: -0px -67px; width: 19px; height: 18px; }
+    .mail { background-position: -21px -50px; width: 20px; height: 15px; margin-bottom: -2px; }
+    .star-fullwhite { background-position: -21px -65px; width: 19px; height: 18px; margin-bottom: -2px; }
+    .star-white { background-position: -0px -67px; width: 19px; height: 18px; margin-bottom: -2px; }
     .info-ico { background-position: -19px -83px; width: 14px; height: 14px; margin-bottom: -2px;}
     .arrow-down { background-position: -40px -65px; width: 10px; height: 6px; }
 ///SPRITE
@@ -337,6 +337,23 @@
                 }
             }
             
+        }
+
+        .more-wrapper {
+            text-align: center;
+            .more-search {
+                &:before, &:after {
+                    display: inline-block;
+                    content: '';
+                    width: 100%;
+                    height: 1px;
+                    background-color: #333;
+                }
+
+                // &:after {
+                //     width: 100%;
+                // }
+            }
         }
 
         .menu-switcher {

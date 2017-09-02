@@ -5,7 +5,7 @@ ready(() => {
 	const select = document.getElementById('select-display');
 	const dropdown = document.getElementsByClassName('dropdown-select')[0];
 	select.onclick = () => {
-	dropdown.classList.toggle('collapsed');
+		dropdown.classList.toggle('collapsed');
 	}
 	// document.onclick = function() {
 	//     if(!dropdown.classList.contains('collapsed')){
@@ -21,8 +21,8 @@ ready(() => {
 	// }
 
 	dropdown.onclick = (e) => {
-			originalSelect.value = select.innerHTML = e.target.innerHTML;
-			dropdown.classList.toggle('collapsed');
+		originalSelect.value = select.innerHTML = e.target.innerHTML;
+		dropdown.classList.toggle('collapsed');
 	}
 })
 

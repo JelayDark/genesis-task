@@ -729,7 +729,7 @@ window.onload = function () {
 };
 "use strict";
 
-ready = function ready() {
+ready(function () {
 
     var totooButton = document.getElementById('scroll-top');
 
@@ -737,8 +737,8 @@ ready = function ready() {
     var scrollTop = function scrollTop() {
         var top = Math.max(document.body.scrollTop, document.documentElement.scrollTop);
         if (top > 0) {
-            window.scrollBy(0, -100);
-            timer = setTimeout(scrollTop, 20);
+            // window.scrollBy(0,-100);
+            // timer = setTimeout(scrollTop, 20);
         } else clearTimeout(timer);
         // return false;
     };
@@ -746,7 +746,7 @@ ready = function ready() {
     totooButton.onclick = function () {
         return scrollTop();
     };
-};
+});
 "use strict";
 
 ready(function () {
