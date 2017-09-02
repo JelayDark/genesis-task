@@ -1,4 +1,4 @@
-@import '../helpers/mixins';
+// @import '../helpers/mixins';
 
 @media(max-width: 767px) {
 
@@ -98,11 +98,9 @@
             height: 26px;
             background: url(../../images/menu-icon.png) 0 0 no-repeat;
             background-size: cover;
-            // margin-top: 5px; 
         }
 
         a {
-            // display: inline-block;
             padding: 0;
             float: right;
             margin-right: 15px;

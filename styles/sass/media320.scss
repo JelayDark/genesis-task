@@ -1,5 +1,3 @@
-@import '../helpers/mixins';
-
 @media(max-width: 479px) {
 
     .top-girls {
@@ -28,7 +26,6 @@
         .menu-switcher {
             .menu-item {
                 a {
-                    // line-height: 20px;
                     font-size: 12px;
                 }
             }

@@ -10,7 +10,7 @@ const concat = require('gulp-concat');
 
 
 gulp.task('build-sass', () => {
-    return gulp.src('./styles/sass/*.scss')
+    return gulp.src('./styles/sass/main.scss')
             .pipe(sass().on('error', sass.logError))
             .pipe(cleanCSS())
             .pipe(rename({suffix: '.min'}))
@@ -18,7 +18,7 @@ gulp.task('build-sass', () => {
 });
 
 gulp.task('sass:watch', () => {
-    gulp.watch('./styles/sass/*.scss', ['build-sass']);
+    gulp.watch('./styles/sass/main.scss', ['build-sass']);
 });
 
 gulp.task('babel', () => {
