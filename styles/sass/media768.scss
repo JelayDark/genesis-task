@@ -1,31 +1,9 @@
-@media(min-width: 768px) {
-    $gray: #f0f0f0;
-    $color-text: #333;
-    $blue: #376cf8;
+@import '../helpers/mixins';
+
+@media(max-width: 1024px) {
 
     .min-menu-wrapper {
-        display: none;///////////
-    }
-
-    .container {
-        position: relative;
-    }
-
-    ul {
-        padding: 0;
-        margin: 0;
-        li {
-            list-style: none;
-            // margin: 0;
-            a {
-                color: $color-text;
-                &:hover {
-                    text-decoration: none;
-                    color: $blue;
-                    transition: .8s;
-                }
-            }
-        }
+        display: none;
     }
 
     .clearfix {
@@ -34,14 +12,6 @@
             display: table;
             clear: both;
         }
-    }
-
-    body {
-        color: $color-text;
-        font-family: Roboto;
-        font-size: 16px;
-        font-weight: 500;
-        line-height: 30px;
     }
 
     .logo-wrapper {
