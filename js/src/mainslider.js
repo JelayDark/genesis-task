@@ -200,7 +200,7 @@ const initialGirls = [
 
 ready(() => {
     let girls = initialGirls;
-    const sliderFirstLine = document.getElementsByClassName('list-result')[0];
+    const girlSlider = document.getElementsByClassName('list-result')[0];
     const pagNav = document.getElementsByClassName('pag-nav')[0];
 
     let onPageMax; // количество фотографий на странице
@@ -219,34 +219,33 @@ ready(() => {
         onPageMax = 8;
         maxPag = 7;
     }
-    let pageCount = Math.ceil(girls.length / onPageMax) - 1;
 
-
+    let pageCount = Math.ceil(girls.length / onPageMax) - 1; //Высчитываем кол-во страниц
     let pageNow = 0;
 
-    const pagDrow = (thisnow) => {
+    const pagDrow = (thisnow) => { //функция отрисовки пагинации
         pagNav.innerHTML = '';
         pageCount < 1 ? pagNav.style.display = "none" : pagNav.style.display = "block";
         pagNav.innerHTML += `<li class = "page-num"><span class="page-prev">&lt;</span></li>`;
-        if(maxPag > 0) {
-            if (pageCount >= maxPag) {
-                if((pageCount - thisnow - 1 >= (maxPag-1)/2) && (thisnow > (maxPag-1)/2)) {
+        if(maxPag > 0) { //вообще можно выводить цифры
+            if (pageCount >= maxPag) {//если страниц больше, чем корректно выводится на экране
+                if((pageCount - thisnow - 1 >= (maxPag-1)/2) && (thisnow > (maxPag-1)/2)) {//обычная ситуация
                     for (let i = thisnow + 1 - (maxPag-1)/2; i < thisnow + 2 + (maxPag-1)/2; i++) {
                         pagNav.innerHTML += `<li class="page-num"><span class="pn">${i}</span></li>`
                     }
                     document.getElementsByClassName('pn')[(maxPag-1)/2].classList.add("active");
-                } else if(pageCount - thisnow - 1 < (maxPag-1)/2) {
+                } else if(pageCount - thisnow - 1 < (maxPag-1)/2) { //если последние страницы
                     for (let i = pageCount - maxPag + 2; i < pageCount + 2; i++) {
                         pagNav.innerHTML += `<li class="page-num"><span class="pn">${i}</span></li>`
                     }
                     document.getElementsByClassName('pn')[maxPag - (pageCount - thisnow + 1)].classList.add("active");
-                } else {
+                } else { //если первые страницы
                     for (let i = 0; i < maxPag; i++) {
                         pagNav.innerHTML += `<li class="page-num"><span class="pn">${i+1}</span></li>`
                     }
                     document.getElementsByClassName('pn')[thisnow].classList.add("active");
                 }
-            } else {
+            } else { //количество страниц маленькое
                 for (let i = 0; i <= pageCount; i++) {
                     pagNav.innerHTML += `<li class="page-num"><span class="pn">${i + 1}</span></li>`
                 }
@@ -257,7 +256,7 @@ ready(() => {
 
     }
 
-    const doList = (object) => {
+    const doList = (object) => { //Функция превращает объект в ноду
         if(object!= undefined) {
             return( `
                                 <li class="res-item">
@@ -272,7 +271,7 @@ ready(() => {
                                         </div>
                                         <figcaption>
                                             <ul class="like-menu">
-                                                <li class="menu-item"><a href=""><span class="${object.isFavorite ? "star-fullwhite" : "star-white"}"></span>Избранное</a></li>
+                                                <li class="menu-item"><span class = "favour-link"><span class="star ${object.isFavorite ? "star-fullwhite" : "star-white"}"></span>Избранное</span></li>
                                                 <li class="menu-item"><a href=""><span class="mail"></span>Написать</a></li>
                                             </ul>
                                             <div class="info">
@@ -284,7 +283,7 @@ ready(() => {
                                 </li>`
                     );
                 
-            } else {
+            } else { //Если элементов меньше, чем обычно на странице, заменяем их пустыми нодами
                 const neededHeight = document.querySelector('.res-item').offsetHeight;
                 return (
                     `
@@ -293,17 +292,39 @@ ready(() => {
             }
 
     }
+    
+    //Adding as Favourite only MarkUp
+    const letsLike = () => {
+        const starS = document.getElementsByClassName('star');
+        const dolike = (e) => { // функция изменения визуального изображения иконки
+            const numberGirl = pageNow * onPageMax + [...starS].indexOf(e.target.children[0]); //получаю номер девочки, на которую кликают
 
-    const showList = () => {
-        console.log(girls);
-        console.log(sliderFirstLine.offsetHeight);
-        sliderFirstLine.innerHTML = '';
-        for(let i = 0 + pageNow * onPageMax; i < onPageMax + pageNow * onPageMax; i++) {
-                sliderFirstLine.innerHTML += doList(girls[i]);
+            if(girls[numberGirl].isFavorite === true) {
+                e.target.children[0].classList.remove('star-fullwhite');
+                e.target.children[0].classList.add('star-white');
+                girls[numberGirl].isFavorite = false; 
+            } else {
+                e.target.children[0].classList.remove('star-white');
+                e.target.children[0].classList.add('star-fullwhite');
+                girls[numberGirl].isFavorite = true; // Девочка теперь до перезагрузки страницы может быть найдена при активной "Популярные"
             }
+        } 
+
+        [...starS].forEach(like => {
+            like.parentNode.addEventListener("click", dolike, false);
+        });
+    }
+
+    const showList = () => { //Отображение списка девчонок
+        girlSlider.innerHTML = '';
+        for(let i = 0 + pageNow * onPageMax; i < onPageMax + pageNow * onPageMax; i++) {
+                girlSlider.innerHTML += doList(girls[i]);
+        }
+        letsLike();
+        
     }
     
-    const changePage = (e) => {
+    const changePage = (e) => { //функция изменения страницы
         if (e.target.classList.contains('page-prev')) {
             --pageNow < 0 ? pageNow = 0 : showList();
             pagDrow(pageNow);
@@ -314,30 +335,7 @@ ready(() => {
             e.target.innerHTML - 1 == pageNow ? false : pageNow = e.target.innerHTML - 1, showList(), pagDrow(pageNow);
         }
     }
-    showList();
-    pagDrow(pageNow);
 
-    document.addEventListener("click", changePage, false);
-    
-    window.onresize = () => { //Перерисовываю поиск при изменении размеров окна браузера
-        console.log(window.innerWidth);
-        if(window.innerWidth < 480) {
-            onPageMax = 1;
-            maxPag = 0;
-        } else if (window.innerWidth < 768) {
-            onPageMax = 2;
-            maxPag = 3;
-        } else if (window.innerWidth < 1025) {
-            onPageMax = 6;
-            maxPag = 5;
-        } else {
-            onPageMax = 8;
-            maxPag = 7;
-        }
-        showList();
-        pageNow = 0;
-        pagDrow(pageNow);
-    }
 
     //////SEARCHING
     const formSearchButton = document.getElementsByClassName('button-search')[0];
@@ -359,7 +357,7 @@ ready(() => {
         if(girls.length) {
             showList();
         } else {
-            sliderFirstLine.innerHTML = "<div class='errorfound'>Никого не найдено. Для повторной попытки нажмите 'Новые'</div>";
+            girlSlider.innerHTML = "<div class='errorfound'>Никого не найдено. Для повторной попытки нажмите 'Новые'</div>";
         }
         
         pageNow = 0;
@@ -406,28 +404,33 @@ ready(() => {
         pagDrow(pageNow);
     }
 
-    //Adding as Favourite only MarkUp
-    const likeD = document.getElementsByClassName('star-fullwhite');
-    const likeNo = document.getElementsByClassName('star-white');
+    //START
+    
+    showList(); //Отрисовываем окно найденок
+    pagDrow(pageNow); //И к ним пагинация
 
-    const dolike = (e) => {
-        e.preventDefault();
-        console.log(e.target.children[0]);
-        if(e.target.children[0].classList.contains('star-fullwhite')) {
-            e.target.children[0].classList.remove('star-fullwhite');
-            e.target.children[0].classList.add('star-white');
+    document.addEventListener("click", changePage, false);
+    
+    window.onresize = () => { //Перерисовываю поиск при изменении размеров окна браузера
+        if(window.innerWidth < 480) {
+            onPageMax = 1;
+            maxPag = 0;
+        } else if (window.innerWidth < 768) {
+            onPageMax = 2;
+            maxPag = 3;
+        } else if (window.innerWidth < 1025) {
+            onPageMax = 6;
+            maxPag = 5;
         } else {
-            e.target.children[0].classList.remove('star-white');
-            e.target.children[0].classList.add('star-fullwhite');
+            onPageMax = 8;
+            maxPag = 7;
         }
-    } 
-    [...likeD].forEach(like => {
-        like.parentNode.addEventListener("click", dolike, false);
-    });
+        showList();
+        pageNow = 0;
+        pagDrow(pageNow);
+    }
 
-    [...likeNo].forEach(like => {
-        like.parentNode.addEventListener("click", dolike, false);
-    });
+
 
 
 

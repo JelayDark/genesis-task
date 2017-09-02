@@ -75,18 +75,15 @@ ready(() => {
         auto(input.value);
     }
 
-    document.onclick = (e) => {
+    document.addEventListener("click", (e) => {
         if(e.target.classList.contains('clear')) {
             input.value = '';
             input.focus();
         } else {
             if(e.target.classList.contains('result-item')) {
-                // input.value = e.target.innerHTML;
                 input.setAttribute('value', e.target.innerHTML);
-                console.log('input', input, 'value: ', input.value);
             }
             cityResult.innerHTML = '';
         }
-    }
-
+    })
 })

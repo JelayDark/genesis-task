@@ -11,7 +11,6 @@ ready(() => {
             window.scrollBy(0,-100);
             timer = setTimeout(scrollTop, 20);
         } else clearTimeout(timer);
-        // return false;
     }
 
     totooButton.onclick = () => scrollTop();

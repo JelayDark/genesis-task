@@ -7,18 +7,9 @@ ready(() => {
 	select.onclick = () => {
 		dropdown.classList.toggle('collapsed');
 	}
-	// document.onclick = function() {
-	//     if(!dropdown.classList.contains('collapsed')){
-	//         dropdown.classList.remove('collapsed');
-	//         dropdown.style.height=0;
-	//     }
-	// }
+
 	const fem = document.getElementById('female');
 	const male = document.getElementById('male');
-
-	// document.onclick = (e) => {
-	//         dropdown.classList.toggle('collapsed');
-	// }
 
 	dropdown.onclick = (e) => {
 		let genNeed; //будущий value
@@ -33,13 +24,3 @@ ready(() => {
 	}
 })
 
-// fem.onclick = () => {
-//         select.innerHTML = fem.innerHTML;
-//         dropdown.classList.toggle('collapsed');
-//         originalSelect.value = fem.innerHTML;
-// }
-// male.onclick = () => {
-//         select.innerHTML = male.innerHTML;
-//         dropdown.classList.toggle('collapsed');
-//         originalSelect.value = male.innerHTML;
-// }

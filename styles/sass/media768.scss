@@ -29,6 +29,11 @@
         @include clearfix;
 
     }
+
+    .right-edge {
+        position: relative;
+    }
+
     .user-wrapper {
         position: absolute;
         top: 0;
@@ -439,16 +444,21 @@
                         .menu-item {
                             width: 50%;
                             float: left;
-                            a {
+                             a, .favour-link {
                                 display: block;
                                 line-height: 40px;
                                 color: #fff;
                                 text-align: center;
                                 font-weight: 400;
+                                cursor: pointer;
                                 transition: .8s;
                             }
 
-                            &:hover a{
+                            &:hover a {
+                                transform: scale(1.1);
+                            }
+
+                            &:hover .favour-link {
                                 transform: scale(1.1);
                             }
 

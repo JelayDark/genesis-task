@@ -19,7 +19,7 @@ gulp.task('build-sass', () => {
 });
 
 gulp.task('sass:watch', () => {
-    gulp.watch('./styles/sass/main.scss', ['build-sass']);
+    gulp.watch('./styles/sass/*.scss', ['build-sass']);
 });
 
 gulp.task('babel', () => {

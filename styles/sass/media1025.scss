@@ -65,6 +65,11 @@
         @include clearfix;
 
     }
+
+    .right-edge {
+        position: relative;
+    }
+
     .user-wrapper {
         position: absolute;
         top: 0;
@@ -85,10 +90,10 @@
                 .blue {
                     color: $blue;
                     &:hover .arrow-down {
-                        // -moz-transform: rotate(90deg); /* Для Firefox */
-                        // -ms-transform: rotate(90deg); /* Для IE */
-                        // -webkit-transform: rotate(90deg); /* Для Safari, Chrome, iOS */
-                        // -o-transform: rotate(90deg); /* Для Opera */
+                        -moz-transform: rotate(90deg); /* Для Firefox */
+                        -ms-transform: rotate(90deg); /* Для IE */
+                        -webkit-transform: rotate(90deg); /* Для Safari, Chrome, iOS */
+                        -o-transform: rotate(90deg); /* Для Opera */
                         transform: rotate(90deg);
 
                     }
@@ -282,7 +287,7 @@
                 .cityresult {
                     position: absolute;
                     z-index: 9999;
-                    top: 33px;
+                    top: 27px;
                     width: 270px;
                     max-height: 248px;
                     .result-item {
@@ -502,15 +507,21 @@
                         .menu-item {
                             width: 50%;
                             float: left;
-                            a{
+                            a, .favour-link {
                                 display: block;
                                 line-height: 40px;
                                 color: #fff;
                                 text-align: center;
                                 font-weight: 400;
+                                cursor: pointer;
+                                transition: .8s;
                             }
 
-                            &:hover a{
+                            &:hover a {
+                                transform: scale(1.1);
+                            }
+
+                            &:hover .favour-link {
                                 transform: scale(1.1);
                             }
 
