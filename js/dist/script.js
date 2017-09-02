@@ -456,8 +456,10 @@ ready(function () {
 
     var moreButton = document.getElementsByClassName('more-search')[0];
     var moreBlock = document.getElementsByClassName('block-addon')[0];
+    var arrowOpen = document.getElementsByClassName('arrow-down')[1];
     moreButton.onclick = function () {
         moreBlock.classList.toggle('more-opened');
+        arrowOpen.classList.toggle('arrow-opened');
     };
 });
 "use strict";

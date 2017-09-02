@@ -3,6 +3,33 @@
     $color-text: #333;
     $blue: #376cf8;
 
+    @keyframes bounce { 
+        0%, 20%, 50%, 80%, 100% {
+            transform: translateY(0);
+            } 
+        40% {
+            transform: translateY(-6px);
+            } 
+        60% {
+            transform: translateY(-3px);
+            } 
+    } 
+    
+    @keyframes bouncenew { 
+        0%, 20%, 50%, 80%, 100% {
+            // transform: rotateX(180deg);
+            transform: translateY(0);
+            } 
+        40% {
+            transform: translateY(6px);
+            // transform: rotateX(180deg);
+            } 
+        60% {
+            transform: translateY(3px);
+            // transform: rotateX(180deg);
+            } 
+    } 
+
     // html.scrolling{
     //     transition: transform .3s;
     // }
@@ -14,9 +41,9 @@
     
     .totop { background-position: -0px -0px; width: 50px; height: 50px; margin-bottom: -2px;}
     .camera { background-position: -0px -50px; width: 21px; height: 17px; margin-bottom: -2px;}
-    .mail { background-position: -21px -50px; width: 20px; height: 15px; margin-bottom: -2px; }
-    .star-fullwhite { background-position: -21px -65px; width: 19px; height: 18px; margin-bottom: -2px; }
-    .star-white { background-position: -0px -67px; width: 19px; height: 18px; margin-bottom: -2px; }
+    .mail { background-position: -21px -50px; width: 20px; height: 15px; margin: 0 5px -2px 0; }
+    .star-fullwhite { background-position: -21px -65px; width: 19px; height: 18px; margin: 0 5px -2px 0;}
+    .star-white { background-position: -0px -67px; width: 19px; height: 18px; margin: 0 5px -2px 0;}
     .info-ico { background-position: -19px -83px; width: 14px; height: 14px; margin-bottom: -2px;}
     .arrow-down { background-position: -40px -65px; width: 10px; height: 6px; }
 ///SPRITE
@@ -84,6 +111,29 @@
         .menu-item {
             float: left;
             margin-right: 20px;
+            a {
+                position: relative;
+                transition: all 0.5s ease;
+                &:after {
+                    background: #fff;
+                    bottom: 0;
+                    content: '';
+                    height: 2px;
+                    left: 0;
+                    position: absolute;
+                    transform: scaleX(0);
+                    transform-origin: left 0;
+                    transition: all 0.5s ease;
+                    width: 100%;
+                    visibility: hidden;
+                
+                }
+                &:hover::after {
+                    background: $blue;
+                    transform: scaleX(1);
+                    visibility: visible;
+                }
+            }
         }
 
         @extend .clearfix;
@@ -108,14 +158,21 @@
                 }
                 .blue {
                     color: $blue;
+                    &:hover .arrow-down {
+                        -moz-transform: rotate(90deg); /* Для Firefox */
+                        -ms-transform: rotate(90deg); /* Для IE */
+                        -webkit-transform: rotate(90deg); /* Для Safari, Chrome, iOS */
+                        -o-transform: rotate(90deg); /* Для Opera */
+                        transform: rotate(90deg);
+
+                    }
+                }
+
+                .arrow-down {
+                    transition: 0.5s ease;
                 }
 
                 // #user-dropdown {
-                //     -moz-transform: rotate(15deg); /* Для Firefox */
-                //     -ms-transform: rotate(15deg); /* Для IE */
-                //     -webkit-transform: rotate(15deg); /* Для Safari, Chrome, iOS */
-                //     -o-transform: rotate(15deg); /* Для Opera */
-                //     transform: rotate(15deg);
                 //     height: 10px;
                 //     width: 10px;
                 // }
@@ -153,9 +210,17 @@
                     border-radius: 10px;
                     margin: 0;
                     overflow: hidden;
+                    cursor: pointer;
                     img {
+                        transition: 0.5s ease;
                         width: 130px;
                         height: 130px;
+                    }
+                    &:hover img{
+                        -webkit-transform: scale(1.1);
+                        -moz-transform: scale(1.1);
+                        -o-transform: scale(1.1);
+                        transform: scale(1.1);
                     }
                 }
             }
@@ -358,17 +423,28 @@
                 line-height: 17px;
                 text-align: center;
                 cursor: pointer;
-                // &:before, &:after {
-                //     display: inline-block;
-                //     content: '';
-                //     width: 100%;
-                //     height: 1px;
-                //     background-color: #333;
-                // }
+                
+                .arrow-down {
+                    transform: rotateX(0);
+                    transition: 0.5s ease;
+                }
 
-                // &:after {
-                //     width: 100%;
-                // }
+                &:hover .arrow-down {
+                    animation: 2s ease 0s normal none infinite running bounce;
+                }
+
+                .arrow-opened {
+                    animation: paused bounce;
+                    // animation-play-state: paused;
+                    transform: rotateX(180deg);
+                }
+
+                &:hover .arrow-opened{
+                    transform: rotateX(180deg);
+                    animation: 2s ease 0s normal none infinite running bouncenew;
+                }
+
+
             }
 
             .block-addon {
@@ -449,7 +525,9 @@
             cursor: pointer;
             font-size: 30px;
             color: $gray;
-            // background-color: #fff;
+            &:hover {
+                animation: 2s ease 0s normal none infinite running bounce;
+            }
         }
 
         .list-result {
@@ -485,10 +563,22 @@
                         // height: 270px;
                         width: 100%;
                         position: relative;
+                        cursor: pointer;
+                        overflow: hidden;
+                        border-radius: 10px 10px 0 0;
+                        img {
+                            transition: .5s ease;
+                        }
+                        &:hover img {
+                            -webkit-transform: scale(1.1);
+                            -moz-transform: scale(1.1);
+                            -o-transform: scale(1.1);
+                            transform: scale(1.1);
+                        }
                         .count-ph {
                             display: block;
                             position: absolute;
-                            padding: 8px;
+                            padding: 6px;
                             top: 10px;
                             left: 10px;
                             background-color: rgba(0, 0, 0, .5);

@@ -13,7 +13,9 @@ ready(() => {
 
     const moreButton = document.getElementsByClassName('more-search')[0];
     const moreBlock = document.getElementsByClassName('block-addon')[0];
+    const arrowOpen = document.getElementsByClassName('arrow-down')[1];
     moreButton.onclick = () => {
         moreBlock.classList.toggle('more-opened');
+        arrowOpen.classList.toggle('arrow-opened');
     }
 });
