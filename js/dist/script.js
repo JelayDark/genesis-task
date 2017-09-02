@@ -71,98 +71,14 @@ ready(function () {
             input.focus();
         } else {
             if (e.target.classList.contains('result-item')) {
-                input.value = e.target.innerHTML;
+                // input.value = e.target.innerHTML;
+                input.setAttribute('value', e.target.innerHTML);
+                console.log('input', input, 'value: ', input.value);
             }
             cityResult.innerHTML = '';
         }
     };
 });
-
-// const cities = [
-//     {
-//         "city": "Санкт-Петербург",
-//         "country": "Россия"
-//     },
-//     {
-//         "city": "Москва",
-//         "country": "Россия"
-//     },
-//     {
-//         "city": "Ростов",
-//         "country": "Россия"
-//     },
-//     {
-//         "city": "Киев",
-//         "country": "Украина"
-//     },
-//     {
-//         "city": "Запорожье",
-//         "country": "Украина"
-//     },
-//     {
-//         "city": "Днепропетровск",
-//         "country": "Украина"
-//     },
-//     {
-//         "city": "Варшава",
-//         "country": "Польша"
-//     },
-//     {
-//         "city": "Новгород",
-//         "country": "Россия"
-//     },
-//     {
-//         "city": "Черновцы",
-//         "country": "Украина"
-//     }
-// ]
-
-// const input = document.querySelector('input[type=text]');
-// const cityResult = document.querySelector('.cityresult');
-
-// const auto = (value) => {
-//     const val = value.toLowerCase();
-
-//     const filter = cities.filter(city => {
-//         if (city.city.toLowerCase().includes(val)) {
-//             return city.city.toLowerCase().includes(val);
-//         } else if (city.country.toLowerCase().includes(val)) {
-//             return city.country.toLowerCase().includes(val);
-//         }
-//     })
-
-//     if (filter.length > 0) {
-//         filter.forEach((item, i) => {
-//             cityResult.innerHTML += '<li class="result-item">' + item.city + ', ' + item.country + '</li>';
-//         });
-
-//         if(filter.length > 8)  {
-//             cityResult.style.overflowY = "scroll";
-//         } else {
-//             cityResult.style.overflowY = "hidden";
-//         }
-//     } else {
-//         cityResult.innerHTML = '<li class="result-no">Увы, но такого города нет.. </li>';
-//         cityResult.style.overflowY = "hidden";
-//     }
-// }
-
-// input.onkeyup = (e) => {
-//     cityResult.innerHTML = '';
-//     auto(input.value);
-// }
-
-// document.onclick = (e) => {
-//     if(e.target.classList.contains('clear')) {
-//         input.value = '';
-//         input.focus();
-//     } else {
-//         if(e.target.classList.contains('result-item')) {
-//             input.value = e.target.innerHTML;
-//         }
-//         cityResult.innerHTML = '';
-//     }
-// }
 "use strict";
 
 function ready(fn) {
@@ -497,6 +413,33 @@ ready(function () {
         pageNow = 0;
         pagDrow(pageNow);
     };
+
+    //////SEARCHING
+    var formSearchButton = document.getElementsByClassName('button-search')[0];
+
+    formSearchButton.onclick = function (e) {
+        e.preventDefault();
+        var valueCity = document.querySelector('input[type=text]').getAttribute('value');
+        var valueGender = document.querySelector('select').value;
+        var valueAgeMin = document.getElementById('year-min').value;
+        var valueAgeMax = document.getElementById('year-max').value;
+        console.log(valueCity, valueGender, valueAgeMax, valueAgeMin);
+        var girlsFound = girls.filter(function (girl) {
+            if (valueGender === girl.gender && valueCity === girl.city && girl.age <= valueAgeMax && girl.age >= valueAgeMin) {
+                console.log(girl);
+                return girl;
+            }
+        });
+        console.log(girlsFound);
+
+        sliderFirstLine.innerHTML = '';
+        for (var i = 0 + pageNow * onPageMax; i < onPageMax + pageNow * onPageMax; i++) {
+            sliderFirstLine.innerHTML += doList(girlsFound[i]);
+        }
+
+        pageNow = 0;
+        pagDrow(pageNow);
+    };
 });
 "use strict";
 
@@ -509,6 +452,12 @@ ready(function () {
     };
     closeButton.onclick = function () {
         menu.classList.toggle('menu-collapsed');
+    };
+
+    var moreButton = document.getElementsByClassName('more-search')[0];
+    var moreBlock = document.getElementsByClassName('block-addon')[0];
+    moreButton.onclick = function () {
+        moreBlock.classList.toggle('more-opened');
     };
 });
 "use strict";
@@ -637,8 +586,10 @@ window.onload = function () {
 
     var mintext = parseInt(parseInt(getComputedStyle(thumbMin).left) / (rangeEnd / (MAX_YEAR - 18))) + 18;
     thumbMin.children[0].innerHTML = mintext;
+    document.getElementById('year-min').setAttribute('value', mintext);
     var maxtext = parseInt(parseInt(getComputedStyle(thumbMax).left) / (rangeEnd / (MAX_YEAR - 18))) + 18;
     thumbMax.children[0].innerHTML = maxtext;
+    document.getElementById('year-max').setAttribute('value', maxtext);
 
     thumbMin.onmousedown = function (e) {
         var thumbCoords = getCoords(thumbMin);
@@ -669,7 +620,7 @@ window.onload = function () {
         };
 
         document.onmouseup = function () {
-            document.getElementById('year-min').value = thumbMin.children[0].innerHTML;
+            document.getElementById('year-min').setAttribute('value', thumbMin.children[0].innerHTML);
             document.onmousemove = document.onmouseup = null;
         };
 
@@ -707,7 +658,8 @@ window.onload = function () {
 
         document.onmouseup = function () {
             document.onmousemove = document.onmouseup = null;
-            document.getElementById('year-max').value = thumbMax.children[0].innerHTML;
+            // document.getElementById('year-max').value = thumbMax.children[0].innerHTML;
+            document.getElementById('year-max').setAttribute('value', thumbMax.children[0].innerHTML);
             // console.log('max: ', document.getElementById('year-max').value);
         };
 
@@ -737,8 +689,8 @@ ready(function () {
     var scrollTop = function scrollTop() {
         var top = Math.max(document.body.scrollTop, document.documentElement.scrollTop);
         if (top > 0) {
-            // window.scrollBy(0,-100);
-            // timer = setTimeout(scrollTop, 20);
+            window.scrollBy(0, -100);
+            timer = setTimeout(scrollTop, 20);
         } else clearTimeout(timer);
         // return false;
     };
@@ -770,7 +722,14 @@ ready(function () {
 	// }
 
 	dropdown.onclick = function (e) {
-		originalSelect.value = select.innerHTML = e.target.innerHTML;
+		var genNeed = void 0; //будущий value
+		select.innerHTML = e.target.innerHTML;
+		if (e.target.innerHTML === "Девушку") {
+			genNeed = "Девушка";
+		} else {
+			genNeed = "Парень";
+		}
+		originalSelect.setAttribute('value', genNeed);
 		dropdown.classList.toggle('collapsed');
 	};
 });

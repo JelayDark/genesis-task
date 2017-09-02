@@ -10,4 +10,10 @@ ready(() => {
     closeButton.onclick = () => {
         menu.classList.toggle('menu-collapsed');
     }
+
+    const moreButton = document.getElementsByClassName('more-search')[0];
+    const moreBlock = document.getElementsByClassName('block-addon')[0];
+    moreButton.onclick = () => {
+        moreBlock.classList.toggle('more-opened');
+    }
 });

@@ -379,4 +379,33 @@ ready(() => {
         pageNow = 0;
         pagDrow(pageNow);
     }
+
+    //////SEARCHING
+    const formSearchButton = document.getElementsByClassName('button-search')[0];
+
+    formSearchButton.onclick = (e) => {
+        e.preventDefault();
+        const valueCity = document.querySelector('input[type=text]').getAttribute('value');
+        const valueGender = document.querySelector('select').value;
+        const valueAgeMin = document.getElementById('year-min').value;
+        const valueAgeMax = document.getElementById('year-max').value;
+        console.log(valueCity, valueGender, valueAgeMax, valueAgeMin);
+        const girlsFound = girls.filter(girl => {
+            if (valueGender === girl.gender && valueCity === girl.city && girl.age <= valueAgeMax && girl.age >= valueAgeMin) {
+                console.log(girl);
+                return girl;
+            }
+        });
+        console.log(girlsFound);
+
+        sliderFirstLine.innerHTML = '';
+        for(let i = 0 + pageNow * onPageMax; i < onPageMax + pageNow * onPageMax; i++) {
+            sliderFirstLine.innerHTML += doList(girlsFound[i]);
+        }
+
+        pageNow = 0;
+        pagDrow(pageNow);
+
+    }
+
 })

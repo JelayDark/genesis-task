@@ -21,7 +21,14 @@ ready(() => {
 	// }
 
 	dropdown.onclick = (e) => {
-		originalSelect.value = select.innerHTML = e.target.innerHTML;
+		let genNeed; //будущий value
+		select.innerHTML = e.target.innerHTML;
+		if (e.target.innerHTML === "Девушку") {
+			genNeed = "Девушка";
+		} else {
+			genNeed = "Парень";
+		}
+		originalSelect.setAttribute('value', genNeed);
 		dropdown.classList.toggle('collapsed');
 	}
 })

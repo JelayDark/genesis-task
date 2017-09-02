@@ -123,8 +123,10 @@ let max = parseInt(getComputedStyle(thumbMax).left);
 
 let mintext = parseInt(parseInt(getComputedStyle(thumbMin).left)/(rangeEnd/(MAX_YEAR-18))) + 18;
 thumbMin.children[0].innerHTML = mintext;
+document.getElementById('year-min').setAttribute('value', mintext);
 let maxtext = parseInt(parseInt(getComputedStyle(thumbMax).left)/(rangeEnd/(MAX_YEAR-18))) + 18;
 thumbMax.children[0].innerHTML = maxtext;
+document.getElementById('year-max').setAttribute('value', maxtext);
 
 thumbMin.onmousedown = (e) => {
     let thumbCoords = getCoords(thumbMin);
@@ -156,7 +158,7 @@ thumbMin.onmousedown = (e) => {
     }
 
     document.onmouseup = () => {
-        document.getElementById('year-min').value = thumbMin.children[0].innerHTML;
+        document.getElementById('year-min').setAttribute('value', thumbMin.children[0].innerHTML);
         document.onmousemove = document.onmouseup = null;
     }
 
@@ -194,7 +196,8 @@ thumbMax.onmousedown = (e) => {
 
     document.onmouseup = () => {
         document.onmousemove = document.onmouseup = null;
-        document.getElementById('year-max').value = thumbMax.children[0].innerHTML;
+        // document.getElementById('year-max').value = thumbMax.children[0].innerHTML;
+        document.getElementById('year-max').setAttribute('value', thumbMax.children[0].innerHTML);
         // console.log('max: ', document.getElementById('year-max').value);
     }
 
