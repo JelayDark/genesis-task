@@ -163,7 +163,7 @@
             .wrapper-select {
                 position: relative;
                 margin: 0 40px 40px 0;
-                span {
+                #select-display {
                     // padding-left: 10px;
                     display: block;
                     width: 130px;
@@ -172,6 +172,7 @@
                     font-weight: 400;
                     line-height: 32px;
                     border-bottom: 1px solid gainsboro;
+                    text-align: left;
                     cursor: pointer;
                 }
                 .dropdown-select {
@@ -194,6 +195,7 @@
                         padding-left: 10px;
                         border-bottom: 1px solid gainsboro;
                         background-color: #f0f0f0;
+                        text-align: left;
                         &:hover {
                             background-color: $blue;
                             color: #fff;
@@ -271,22 +273,92 @@
                 .cityresult {
                     position: absolute;
                     z-index: 9999;
-                    top: 33px;
+                    top: 27px;
                     width: 270px;
                     max-height: 248px;
-                    .result-item {
-                        cursor: pointer;
-                        padding-left: 10px;
-                        border-bottom: 1px solid gainsboro;
-                        background-color: #fff;
-                        &:hover {
-                            background-color: $blue;
-                            color: #fff;
+                    .result {
+                        &-item {
+                            text-align: left;
+                            cursor: pointer;
+                            padding-left: 10px;
+                            border-bottom: 1px solid gainsboro;
+                            background-color: #fff;
+                            &:hover {
+                                background-color: $blue;
+                                color: #fff;
+                            }
+                        }
+                        
+                        &-no {
+                            padding-left: 10px;
+                            text-align: left;
                         }
                     }
                 }
             }
             
+        }
+
+        .more-wrapper {
+            position: relative;
+            // text-align: center;
+            .line {
+                width: 100%;
+                height: 1px;
+                background-color: gainsboro;
+                margin-bottom: 40px;
+            }
+            .more-search {
+                position: absolute;
+                background-color: #fff;
+                top: -9px;
+                left: 50%;
+                margin-left: -100px;
+                width: 200px;
+                line-height: 17px;
+                text-align: center;
+                cursor: pointer;
+                
+                .arrow-down {
+                    transform: rotateX(0);
+                    transition: 0.5s ease;
+                }
+
+                &:hover .arrow-down {
+                    animation: 2s ease 0s normal none infinite running bounce;
+                }
+
+                .arrow-opened {
+                    animation: paused bounce;
+                    // animation-play-state: paused;
+                    transform: rotateX(180deg);
+                }
+
+                &:hover .arrow-opened{
+                    transform: rotateX(180deg);
+                    animation: 2s ease 0s normal none infinite running bouncenew;
+                }
+
+
+            }
+
+            .block-addon {
+                height: 0;
+                overflow: hidden;
+                width: 100%;
+                font-size: 20px;
+                transition: height 0.8s;
+                text-align: center;
+                span {
+                    display: inline-block;
+                    padding-top: 40px;
+                }
+
+            }
+
+            .more-opened {
+                height: 180px;
+            }
         }
 
         .menu-switcher {
@@ -454,6 +526,26 @@
                         }
                     }
                 }
+            }
+        }
+
+        #scroll-top {
+            z-index: 9999;
+            background: url(../../images/icons/totop.png) 0 0 no-repeat;
+            background-size: contain;
+            position: fixed;
+            bottom: 58px;
+            right: 25px;
+            width: 50px;
+            height: 50px;
+            box-shadow: -1px 1px 8px rgba(0,0,0,.25);
+            border-radius: 50%;
+            text-align: center;
+            cursor: pointer;
+            font-size: 30px;
+            color: $gray;
+            &:hover {
+                animation: 2s ease 0s normal none infinite running bounce;
             }
         }
 

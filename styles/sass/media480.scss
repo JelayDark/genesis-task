@@ -158,6 +158,14 @@
         padding-top: 10px; 
         .form-search {
             padding: 0;
+
+            .wrapper-city{
+                .cityresult {
+                    top: 27px;
+                    width: 247px;
+                }
+            }
+
             .search-item {
                 width: 100%;
                 text-align: center;
@@ -220,6 +228,11 @@
                 }
             }
         }
+
+        #scroll-top {
+            display: none;
+        }
+
     }
 
 
