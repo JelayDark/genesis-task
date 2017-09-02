@@ -438,7 +438,7 @@
                         .count-ph {
                             display: block;
                             position: absolute;
-                            padding: 8px;
+                            padding: 6px;
                             top: 10px;
                             left: 10px;
                             background-color: rgba(0, 0, 0, .5);
@@ -490,6 +490,7 @@
                                 line-height: 40px;
                                 color: #fff;
                                 text-align: center;
+                                // font-size: 15px;
                                 font-weight: 400;
                             }
                             &:first-child {
@@ -520,9 +521,9 @@
                         color: $blue;
                         font-size: 18px;
                         &-city {
-                        color: #333;
-                        font-size: 14px;
-                        font-weight: 400; 
+                            color: #333;
+                            font-size: 14px;
+                            font-weight: 400; 
                         }
                     }
                 }

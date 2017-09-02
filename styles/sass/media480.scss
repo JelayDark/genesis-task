@@ -162,7 +162,8 @@
             .wrapper-city{
                 .cityresult {
                     top: 27px;
-                    width: 247px;
+                    width: 100%;
+                    max-width: 270px;
                 }
             }
 
@@ -172,6 +173,7 @@
                 .wrapper {
                     &-select, &-city, &-range {
                         width: 100%;
+                        max-width: 270px;
                         margin: 20px auto;
                     }
                 }
@@ -217,6 +219,15 @@
                 width: 49%;
                 max-width: 270px;
                 .result {
+
+                    .like-menu {
+                        .menu-item {
+                            a{
+                                font-size: 14px;
+                            }
+                        }
+                    }
+
                     .photo {
                         width: 100%;
                         height: auto;
