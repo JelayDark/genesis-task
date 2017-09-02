@@ -81,6 +81,8 @@ ready(function () {
 });
 "use strict";
 
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
 function ready(fn) {
     if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
         fn();
@@ -291,31 +293,24 @@ ready(function () {
         pageCount < 1 ? pagNav.style.display = "none" : pagNav.style.display = "block";
         pagNav.innerHTML += "<li class = \"page-num\"><span class=\"page-prev\">&lt;</span></li>";
         if (maxPag > 0) {
-            console.log("maxPag: ", maxPag, "pageCount: ", pageCount, "thisnow: ", thisnow);
-
             if (pageCount >= maxPag) {
-                console.log("#1");
                 if (pageCount - thisnow - 1 >= (maxPag - 1) / 2 && thisnow > (maxPag - 1) / 2) {
-                    console.log("#2");
                     for (var i = thisnow + 1 - (maxPag - 1) / 2; i < thisnow + 2 + (maxPag - 1) / 2; i++) {
                         pagNav.innerHTML += "<li class=\"page-num\"><span class=\"pn\">" + i + "</span></li>";
                     }
                     document.getElementsByClassName('pn')[(maxPag - 1) / 2].classList.add("active");
                 } else if (pageCount - thisnow - 1 < (maxPag - 1) / 2) {
-                    console.log("#3");
                     for (var _i = pageCount - maxPag + 2; _i < pageCount + 2; _i++) {
                         pagNav.innerHTML += "<li class=\"page-num\"><span class=\"pn\">" + _i + "</span></li>";
                     }
                     document.getElementsByClassName('pn')[maxPag - (pageCount - thisnow + 1)].classList.add("active");
                 } else {
-                    console.log("#4");
                     for (var _i2 = 0; _i2 < maxPag; _i2++) {
                         pagNav.innerHTML += "<li class=\"page-num\"><span class=\"pn\">" + (_i2 + 1) + "</span></li>";
                     }
                     document.getElementsByClassName('pn')[thisnow].classList.add("active");
                 }
             } else {
-                console.log("#5");
                 for (var _i3 = 0; _i3 <= pageCount; _i3++) {
                     pagNav.innerHTML += "<li class=\"page-num\"><span class=\"pn\">" + (_i3 + 1) + "</span></li>";
                 }
@@ -355,9 +350,6 @@ ready(function () {
         }
     };
     showList();
-    // console.log("onstart sliderFirstLine.offsetHeight", sliderFirstLine.offsetHeight);
-    // sliderFirstLine.style.minHeight = sliderFirstLine.offsetHeight + "px";
-
     pagDrow(pageNow);
 
     document.addEventListener("click", changePage, false);
@@ -379,9 +371,6 @@ ready(function () {
             maxPag = 7;
         }
         showList();
-        // console.log("onstart sliderFirstLine.offsetHeight", sliderFirstLine.offsetHeight);
-        // sliderFirstLine.style.minHeight = sliderFirstLine.offsetHeight + "px";
-
         pageNow = 0;
         pagDrow(pageNow);
     };
@@ -396,25 +385,25 @@ ready(function () {
         var valueGender = document.querySelector('select').value;
         var valueAgeMin = document.getElementById('year-min').value;
         var valueAgeMax = document.getElementById('year-max').value;
-        // console.log(valueCity, valueGender, valueAgeMax, valueAgeMin);
         girls = girls.filter(function (girl) {
             if (valueGender === girl.gender && valueCity === girl.city && girl.age <= valueAgeMax && girl.age >= valueAgeMin) {
-                // console.log(girl);
                 return girl;
             }
         });
-        // console.log(girls);
 
-        sliderFirstLine.innerHTML = '';
         pageCount = Math.ceil(girls.length / onPageMax) - 1;
-        for (var i = 0 + pageNow * onPageMax; i < onPageMax + pageNow * onPageMax; i++) {
-            sliderFirstLine.innerHTML += doList(girls[i]);
+
+        if (girls.length) {
+            showList();
+        } else {
+            sliderFirstLine.innerHTML = "<div class='errorfound'>Никого не найдено. Для повторной попытки нажмите 'Новые'</div>";
         }
 
         pageNow = 0;
         pagDrow(pageNow);
     };
 
+    //FILTERING
     var isOnlineButton = document.getElementsByClassName('menu-switcher')[0].children[0];
     isOnlineButton.onclick = function (e) {
         e.preventDefault();
@@ -452,6 +441,29 @@ ready(function () {
         pageNow = 0;
         pagDrow(pageNow);
     };
+
+    //Adding as Favourite only MarkUp
+    var likeD = document.getElementsByClassName('star-fullwhite');
+    var likeNo = document.getElementsByClassName('star-white');
+
+    var dolike = function dolike(e) {
+        e.preventDefault();
+        console.log(e.target.children[0]);
+        if (e.target.children[0].classList.contains('star-fullwhite')) {
+            e.target.children[0].classList.remove('star-fullwhite');
+            e.target.children[0].classList.add('star-white');
+        } else {
+            e.target.children[0].classList.remove('star-white');
+            e.target.children[0].classList.add('star-fullwhite');
+        }
+    };
+    [].concat(_toConsumableArray(likeD)).forEach(function (like) {
+        like.parentNode.addEventListener("click", dolike, false);
+    });
+
+    [].concat(_toConsumableArray(likeNo)).forEach(function (like) {
+        like.parentNode.addEventListener("click", dolike, false);
+    });
 });
 "use strict";
 

@@ -562,6 +562,11 @@
                                 text-align: center;
                                 font-weight: 400;
                             }
+
+                            &:hover a{
+                                transform: scale(1.1);
+                            }
+
                             &:first-child {
                                 border-right: 2px solid rgba(256, 256, 256, .2);
                             }
@@ -573,7 +578,7 @@
                     .info {
                         p {
                             margin: 0;
-                            line-height: 30px;
+                            line-height: 24px;
                             .online {
                                 width: 10px;
                                 height: 10px;
