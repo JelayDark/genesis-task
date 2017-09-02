@@ -6,26 +6,50 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
     <!--<link rel="stylesheet" href="styles/dist/newmain.min.css">-->
-    <link rel="stylesheet" href="styles/dist/media320.min.css">
-    <!--<link rel="stylesheet" href="styles/dist/media480.min.css">-->
-    <!--<link rel="stylesheet" href="styles/dist/media768.min.css">-->
-    <link rel="stylesheet" href="styles/dist/media1025.min.css">
+    <!--<link rel="stylesheet" href="styles/dist/media320.min.css" >-->
+    <link rel="stylesheet" href="styles/dist/media1025.min.css" >
+    <!--<link rel="stylesheet" href="styles/dist/media768.min.css" >-->
+    <!--<link rel="stylesheet" href="styles/dist/media480.min.css" >-->
     <!--<script src="js/range-styling.js" async></script>-->
     <script src="js/dist/script.js" async></script>
     <title>Eugeniy Tulyakov | TestTask | Genesis</title>
 </head>
 <body>
     <header>
+        <div class="min-menu-wrapper container menu-collapsed">
+            <span class="close-menu">x</span>
+            <div class="user-menu-mobile">
+                <div class="row">
+                    <div class="col-4">
+                        <div class="profile-photo"></div>
+                    </div>
+                    <ul class="user-info">
+                        <li class="info-item">
+                            <a href="#" class="blue col-6">100 кредитов</a>
+                        </li>
+                        <li class="info-item">
+                            <a href="#" class="blue col-6">Премиум</a>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+            <ul class="mobile-menu">
+                <li class="menu-item"><a href="#find-her">Поиск</a></li>
+                <li class="menu-item"><a href="#">Мои переписки</a></li>
+                <li class="menu-item"><a href="#">Избранное</a></li>
+                <li class="menu-item"><a href="#">Кто смотрел</a></li>
+            </ul>
+        </div>
         <div class="container">
             <div class="row">
                 <div class="col-lg-2 col-md-4 col-sm-12 logo-wrapper">
                     <div class="min-menu"></div>
                     <a href="#"><div class="logo"></div></a>
-                    <!--<div class="min-profile"></div>-->
                 </div>
                 <nav class="col-lg-6" id="top-menu">
                     <ul class="menu-system">
-                        <li class="menu-item"><a href="#">Поиск</a></li>
+                        <li class="menu-item"><a href="#find-her" class = "this-page">Поиск</a></li>
                         <li class="menu-item"><a href="#">Мои переписки</a></li>
                         <li class="menu-item"><a href="#">Избранное</a></li>
                         <li class="menu-item"><a href="#">Кто смотрел</a></li>
@@ -33,7 +57,7 @@
                 </nav> 
                 <div class="col-lg-4 col-md-6 user-wrapper">
                     <ul class="menu-user">
-                        <li class="menu-item"><a href="#" class="blue"><span id="user-dropdown" class="glyphicon glyphicon-menu-down" aria-hidden="true">v</span></a></li> <!-- создать свой иконочный шрифт и сюда вставить -->
+                        <li class="menu-item"><a href="#" class="blue"><span class="arrow-down"></span></a></li> <!-- создать свой иконочный шрифт и сюда вставить -->
                         <li class="menu-item">
                             <a href="#">
                                 <div id="profile">
@@ -42,7 +66,7 @@
                             </a>
                         </li>
                         <li class="menu-item"><a href="#" class="blue">100 кредитов</a></li>
-                        <li class="menu-item"><a href="#">Премиум  <span id="info" class="blue">&copy;</span></a></li>  <!-- Заменить на значок info -->
+                        <li class="menu-item"><a href="#">Премиум  <span class = "info-ico" class="blue"></span></a></li>  <!-- Заменить на значок info -->
                     </ul>    
                 </div>
             </div>
@@ -102,7 +126,7 @@
     </section>
 
     <main>
-        <section>
+        <section id="find-her">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
@@ -179,8 +203,10 @@
                 </div>
                 <div class="row">
                     <ul class="col-lg-12 list-result">
-                        
                     </ul>
+                    <div id="scroll-top">
+                        <div class="totop"></div>
+                    </div>
                 </div>
                 <!--<div class="row">
                     <ul class="col-lg-12 list-result">

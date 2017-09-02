@@ -1,9 +1,87 @@
 @media(max-width: 479px) {
+    $blue: #376cf8;
 
     // body {
     //     font-size: 12px;
     // }
     
+    .min-menu-wrapper {
+        padding: 20px;
+        position: fixed;
+        display: block;
+        width: 100%;
+        height: 100%;
+        z-index: 99999999;
+        background-color: rgba(256,256,256,.9);
+        opacity: 1;
+        transition: 1s;
+        
+        .close-menu {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+            font-size: 25px;
+            font-weight: bold;
+            &:hover {
+                color: #000;
+            }
+
+        }
+
+        .user-menu-mobile {
+            margin-bottom: 20px;
+            .profile-photo {
+                display: block;
+                background: url(../../images/profile.png) 0 0 no-repeat;
+                background-size: contain;
+                // margin-top: -7px;
+                border-radius: 50%;
+                height: 46px;
+                width: 46px;
+            }
+
+            .user-info {
+                margin-top: -1px;
+                .info-item {
+                    line-height: 25px;
+                    .blue {
+                        color: $blue;
+                        &:hover {
+                            color: #333;
+                        }
+                    }
+                }
+
+            }
+
+        }
+
+        .mobile-menu {
+            .menu-item {
+                border-bottom: 1px solid gainsboro;
+                a {
+                    display: block;
+                    width: 100%;
+                    &:hover {
+                        background-color: rgba(240, 240, 240, .8);
+                        // color: #fff;
+                    }
+                }
+                // cursor: pointer;
+            }
+
+        }
+
+    }
+    
+    .menu-collapsed {
+        width: 0;
+        padding: 0;
+        opacity: 0;
+        overflow: hidden;
+    }
+
     .logo-wrapper {
         text-align: center;
         background: rgba(256,256,256,.8);
@@ -120,6 +198,10 @@
             .photo {
                 width: 100%!important;
                 height: auto;
+            }
+
+            .info {
+                text-align: left;
             }
         }
     }

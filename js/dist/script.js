@@ -350,63 +350,166 @@ var girls = [{
 }];
 
 ready(function () {
-    var pageCount = Math.ceil(girls.length / 8) - 1;
     var sliderFirstLine = document.getElementsByClassName('list-result')[0];
-    // const sliderSecondLine = document.getElementsByClassName('list-result')[1];
     var pagNav = document.getElementsByClassName('pag-nav')[0];
-    var onPageMax = 8;
-    console.log(window.innerWidth);
-    // if (window.innerWidth);
+    // let heightOfSlider;
+
+    var onPageMax = void 0; // количество фотографий на странице
+    var maxPag = void 0; // количество элементов пгинации, видимых на экране
+
+    if (window.innerWidth < 480) {
+        onPageMax = 1;
+        maxPag = 0;
+    } else if (window.innerWidth < 768) {
+        onPageMax = 2;
+        maxPag = 3;
+    } else if (window.innerWidth < 1025) {
+        onPageMax = 6;
+        maxPag = 5;
+    } else {
+        onPageMax = 8;
+        maxPag = 7;
+    }
+    var pageCount = Math.ceil(girls.length / onPageMax) - 1;
+
     var pageNow = 0;
 
-    var pagDrow = function pagDrow(pageCount) {
+    var pagDrow = function pagDrow(thisnow) {
+        pagNav.innerHTML = '';
         pageCount < 1 ? pagNav.style.display = "none" : pagNav.style.display = "block";
         pagNav.innerHTML += "<li class = \"page-num\"><span class=\"page-prev\">&lt;</span></li>";
-        for (var i = 0; i <= pageCount; i++) {
-            pagNav.innerHTML += "<li class=\"page-num\"><span class=\"pn\">" + (i + 1) + "</span></li>";
+        if (maxPag > 0) {
+            console.log("maxPag: ", maxPag, "pageCount: ", pageCount, "thisnow: ", thisnow);
+
+            if (pageCount >= maxPag) {
+                console.log("#1");
+                if (pageCount - thisnow - 1 >= (maxPag - 1) / 2 && thisnow > (maxPag - 1) / 2) {
+                    console.log("#2");
+                    for (var i = thisnow + 1 - (maxPag - 1) / 2; i < thisnow + 2 + (maxPag - 1) / 2; i++) {
+                        pagNav.innerHTML += "<li class=\"page-num\"><span class=\"pn\">" + i + "</span></li>";
+                    }
+                    document.getElementsByClassName('pn')[(maxPag - 1) / 2].classList.add("active");
+                } else if (pageCount - thisnow - 1 < (maxPag - 1) / 2) {
+                    console.log("#3");
+                    for (var _i = pageCount - maxPag + 2; _i < pageCount + 2; _i++) {
+                        pagNav.innerHTML += "<li class=\"page-num\"><span class=\"pn\">" + _i + "</span></li>";
+                    }
+                    document.getElementsByClassName('pn')[maxPag - (pageCount - thisnow + 1)].classList.add("active");
+                } else {
+                    console.log("#4");
+                    for (var _i2 = 0; _i2 < maxPag; _i2++) {
+                        pagNav.innerHTML += "<li class=\"page-num\"><span class=\"pn\">" + (_i2 + 1) + "</span></li>";
+                    }
+                    document.getElementsByClassName('pn')[thisnow].classList.add("active");
+                }
+            } else {
+                console.log("#5");
+                for (var _i3 = 0; _i3 <= pageCount; _i3++) {
+                    pagNav.innerHTML += "<li class=\"page-num\"><span class=\"pn\">" + (_i3 + 1) + "</span></li>";
+                }
+                document.getElementsByClassName('pn')[thisnow].classList.add("active");
+            }
         }
         pagNav.innerHTML += "<li class = \"page-num\"><span class=\"page-next\">&gt;</span></li>";
-
-        document.getElementsByClassName('pn')[pageNow].classList.add("active");
     };
 
     var doList = function doList(object) {
-        return "\n                            <li class=\"res-item\">\n                                <figure class=\"result\">\n                                    <div class=\"photo\">\n                                        <img src=\"images/" + object.photo + ".jpg\" alt=\"bigbabe\">\n                                        <a href=\"\" class=\"count-ph\">\n                                            <span>ph</span> <!-- photo icon -->\n                                            <span>" + object.howManyPh + "</span> <!-- count of photoes -->\n                                        </a>\n                                        <a href=\"\" class=\"" + (object.isTop ? "top" : "top-no") + "\">\u0422\u043E\u043F</a>\n                                    </div>\n                                    <figcaption>\n                                        <ul class=\"like-menu\">\n                                            <li class=\"menu-item\"><a href=\"\">\u0418\u0437\u0431\u0440\u0430\u043D\u043D\u043E\u0435</a></li>\n                                            <li class=\"menu-item\"><a href=\"\">\u041D\u0430\u043F\u0438\u0441\u0430\u0442\u044C</a></li>\n                                        </ul>\n                                        <div class=\"info\">\n                                            <p>" + object.name + ", " + object.age + " <span class=\"" + (object.isOnline ? "online" : "online-no") + "\"></span></p>\n                                            <p class=\"info-city\">" + object.city + "</p>\n                                        </div>\n                                    </figcaption>\n                                </figure>\n                            </li>";
+        if (object != undefined) {
+            return "\n                                <li class=\"res-item\">\n                                    <figure class=\"result\">\n                                        <div class=\"photo\">\n                                            <img src=\"images/" + object.photo + ".jpg\" alt=\"bigbabe\">\n                                            <a href=\"\" class=\"count-ph\">\n                                                <span class = \"camera\"></span> <!-- photo icon -->\n                                                <span>" + object.howManyPh + "</span> <!-- count of photoes -->\n                                            </a>\n                                            <a href=\"\" class=\"" + (object.isTop ? "top" : "top-no") + "\">\u0422\u043E\u043F</a>\n                                        </div>\n                                        <figcaption>\n                                            <ul class=\"like-menu\">\n                                                <li class=\"menu-item\"><a href=\"\"><span class=\"" + (object.isFavorite ? "star-fullwhite" : "star-white") + "\"></span>\u0418\u0437\u0431\u0440\u0430\u043D\u043D\u043E\u0435</a></li>\n                                                <li class=\"menu-item\"><a href=\"\"><span class=\"mail\"></span>\u041D\u0430\u043F\u0438\u0441\u0430\u0442\u044C</a></li>\n                                            </ul>\n                                            <div class=\"info\">\n                                                <p>" + object.name + ", " + object.age + " <span class=\"" + (object.isOnline ? "online" : "online-no") + "\"></span></p>\n                                                <p class=\"info-city\">" + object.city + "</p>\n                                            </div>\n                                        </figcaption>\n                                    </figure>\n                                </li>";
+        } else {
+            var neededHeight = document.querySelector('.res-item').offsetHeight;
+            return "\n                        <li class=\"res-item\" style = \"height: " + neededHeight + "px\"></li>";
+        }
+    };
+
+    var showList = function showList() {
+        console.log(sliderFirstLine.offsetHeight);
+        sliderFirstLine.innerHTML = '';
+        for (var i = 0 + pageNow * onPageMax; i < onPageMax + pageNow * onPageMax; i++) {
+            sliderFirstLine.innerHTML += doList(girls[i]);
+        }
+        // console.log(sliderFirstLine.offsetHeight);
     };
 
     var changePage = function changePage(e) {
         if (e.target.classList.contains('page-prev')) {
-            --pageNow < 0 ? pageNow = 0 : document.getElementsByClassName('active')[0].classList.remove("active"), document.getElementsByClassName('pn')[pageNow].classList.add("active");
-            sliderFirstLine.innerHTML = '';
-            for (var i = 0 + pageNow * onPageMax; i < onPageMax + pageNow * onPageMax; i++) {
-                sliderFirstLine.innerHTML += doList(girls[i]);
-            }
+            --pageNow < 0 ? pageNow = 0 : showList();
+            // if (maxPag > 0) {
+            //     document.getElementsByClassName('active')[0].classList.remove("active"); 
+            pagDrow(pageNow);
+            // }
+            // sliderFirstLine.innerHTML = '';
+            // for(let i = 0 + pageNow * onPageMax; i < onPageMax + pageNow * onPageMax; i++) {
+            //     sliderFirstLine.innerHTML += doList(girls[i]);
+            // }
         } else if (e.target.classList.contains('page-next')) {
             // document.getElementsByClassName('active')[0].classList.remove("active");
-            ++pageNow > pageCount ? pageNow = pageCount : document.getElementsByClassName('active')[0].classList.remove("active"), document.getElementsByClassName('pn')[pageNow].classList.add("active");
+            ++pageNow > pageCount ? pageNow = pageCount : showList();
+
+            // if (maxPag > 0) {
+            //     document.getElementsByClassName('active')[0].classList.remove("active"); 
+            pagDrow(pageNow);
+            // }
             // document.getElementsByClassName('pn')[pageNow].classList.add("active");
-            sliderFirstLine.innerHTML = '';
-            for (var _i = 0 + pageNow * onPageMax; _i < onPageMax + pageNow * onPageMax; _i++) {
-                sliderFirstLine.innerHTML += doList(girls[_i]);
-            }
+            // sliderFirstLine.innerHTML = '';
+            // for(let i = 0 + pageNow * onPageMax; i < onPageMax + pageNow * onPageMax; i++) {
+            //     sliderFirstLine.innerHTML += doList(girls[i]);
+            // }
         } else if (e.target.classList.contains('pn')) {
-            document.getElementsByClassName('active')[0].classList.remove("active");
-            pageNow = e.target.innerHTML - 1;
-            document.getElementsByClassName('pn')[pageNow].classList.add("active");
-            sliderFirstLine.innerHTML = '';
-            for (var _i2 = 0 + pageNow * onPageMax; _i2 < onPageMax + pageNow * onPageMax; _i2++) {
-                sliderFirstLine.innerHTML += doList(girls[_i2]);
-            }
+            e.target.innerHTML - 1 == pageNow ? false : pageNow = e.target.innerHTML - 1, showList(), pagDrow(pageNow);
+            // document.getElementsByClassName('active')[0].classList.remove("active");
+            // pageNow = e.target.innerHTML - 1;
+            // document.getElementsByClassName('pn')[pageNow].classList.add("active");
+            // sliderFirstLine.innerHTML = '';
+            // for(let i = 0 + pageNow * onPageMax; i < onPageMax + pageNow * onPageMax; i++) {
+            //     sliderFirstLine.innerHTML += doList(girls[i]);
+            // }
         }
     };
+    showList();
+    // console.log("onstart sliderFirstLine.offsetHeight", sliderFirstLine.offsetHeight);
+    // sliderFirstLine.style.minHeight = sliderFirstLine.offsetHeight + "px";
 
-    for (var i = 0 + pageNow * onPageMax; i < onPageMax + pageNow * onPageMax; i++) {
-        sliderFirstLine.innerHTML += doList(girls[i]);
-    }
-
-    pagDrow(pageCount);
+    pagDrow(pageNow);
 
     document.addEventListener("click", changePage, false);
+
+    window.onresize = function () {
+        //Перерисовываю поиск при изменении размеров окна браузера
+        console.log(window.innerWidth);
+        if (window.innerWidth < 480) {
+            onPageMax = 1;
+            maxPag = 0;
+        } else if (window.innerWidth < 768) {
+            onPageMax = 2;
+            maxPag = 3;
+        } else if (window.innerWidth < 1025) {
+            onPageMax = 6;
+            maxPag = 5;
+        } else {
+            onPageMax = 8;
+            maxPag = 7;
+        }
+        showList();
+        // console.log("onstart sliderFirstLine.offsetHeight", sliderFirstLine.offsetHeight);
+        // sliderFirstLine.style.minHeight = sliderFirstLine.offsetHeight + "px";
+
+        pageNow = 0;
+        pagDrow(pageNow);
+    };
+});
+"use strict";
+
+ready(function () {
+    var menuButton = document.getElementsByClassName('min-menu')[0];
+    var menu = document.getElementsByClassName('min-menu-wrapper')[0];
+    var closeButton = document.getElementsByClassName('close-menu')[0];
+    menuButton.onclick = function () {
+        menu.classList.toggle('menu-collapsed');
+    };
+    closeButton.onclick = function () {
+        menu.classList.toggle('menu-collapsed');
+    };
 });
 "use strict";
 
@@ -623,6 +726,26 @@ window.onload = function () {
             left: box.left + pageXOffset
         };
     }
+};
+"use strict";
+
+ready = function ready() {
+
+    var totooButton = document.getElementById('scroll-top');
+
+    var timer = void 0;
+    var scrollTop = function scrollTop() {
+        var top = Math.max(document.body.scrollTop, document.documentElement.scrollTop);
+        if (top > 0) {
+            window.scrollBy(0, -100);
+            timer = setTimeout(scrollTop, 20);
+        } else clearTimeout(timer);
+        // return false;
+    };
+
+    totooButton.onclick = function () {
+        return scrollTop();
+    };
 };
 "use strict";
 
