@@ -8,11 +8,7 @@ function ready(fn) {
   }
 }
 
-// ready(function(){
-//   alert("DOM fully lo");
-// });
-
-const girls = [
+const initialGirls = [
     {
         "gender": "Девушка",
         "name": "Кариночка",
@@ -203,9 +199,9 @@ const girls = [
 ]
 
 ready(() => {
+    let girls = initialGirls;
     const sliderFirstLine = document.getElementsByClassName('list-result')[0];
     const pagNav = document.getElementsByClassName('pag-nav')[0];
-    // let heightOfSlider;
 
     let onPageMax; // количество фотографий на странице
     let maxPag; // количество элементов пгинации, видимых на экране
@@ -223,7 +219,7 @@ ready(() => {
         onPageMax = 8;
         maxPag = 7;
     }
-    const pageCount = Math.ceil(girls.length / onPageMax) - 1;
+    let pageCount = Math.ceil(girls.length / onPageMax) - 1;
 
 
     let pageNow = 0;
@@ -306,47 +302,23 @@ ready(() => {
     }
 
     const showList = () => {
+        console.log(girls);
         console.log(sliderFirstLine.offsetHeight);
         sliderFirstLine.innerHTML = '';
         for(let i = 0 + pageNow * onPageMax; i < onPageMax + pageNow * onPageMax; i++) {
                 sliderFirstLine.innerHTML += doList(girls[i]);
             }
-        // console.log(sliderFirstLine.offsetHeight);
     }
     
     const changePage = (e) => {
         if (e.target.classList.contains('page-prev')) {
             --pageNow < 0 ? pageNow = 0 : showList();
-            // if (maxPag > 0) {
-            //     document.getElementsByClassName('active')[0].classList.remove("active"); 
-                pagDrow(pageNow);
-            // }
-            // sliderFirstLine.innerHTML = '';
-            // for(let i = 0 + pageNow * onPageMax; i < onPageMax + pageNow * onPageMax; i++) {
-            //     sliderFirstLine.innerHTML += doList(girls[i]);
-            // }
+            pagDrow(pageNow);
         } else if (e.target.classList.contains('page-next')) {
-            // document.getElementsByClassName('active')[0].classList.remove("active");
             ++pageNow > pageCount ? pageNow = pageCount : showList();
-            
-            // if (maxPag > 0) {
-            //     document.getElementsByClassName('active')[0].classList.remove("active"); 
-                pagDrow(pageNow);
-            // }
-            // document.getElementsByClassName('pn')[pageNow].classList.add("active");
-            // sliderFirstLine.innerHTML = '';
-            // for(let i = 0 + pageNow * onPageMax; i < onPageMax + pageNow * onPageMax; i++) {
-            //     sliderFirstLine.innerHTML += doList(girls[i]);
-            // }
+            pagDrow(pageNow);
         } else if (e.target.classList.contains('pn')) {
             e.target.innerHTML - 1 == pageNow ? false : pageNow = e.target.innerHTML - 1, showList(), pagDrow(pageNow);
-            // document.getElementsByClassName('active')[0].classList.remove("active");
-            // pageNow = e.target.innerHTML - 1;
-            // document.getElementsByClassName('pn')[pageNow].classList.add("active");
-            // sliderFirstLine.innerHTML = '';
-            // for(let i = 0 + pageNow * onPageMax; i < onPageMax + pageNow * onPageMax; i++) {
-            //     sliderFirstLine.innerHTML += doList(girls[i]);
-            // }
         }
     }
     showList();
@@ -390,17 +362,18 @@ ready(() => {
         const valueAgeMin = document.getElementById('year-min').value;
         const valueAgeMax = document.getElementById('year-max').value;
         console.log(valueCity, valueGender, valueAgeMax, valueAgeMin);
-        const girlsFound = girls.filter(girl => {
+        girls = girls.filter(girl => {
             if (valueGender === girl.gender && valueCity === girl.city && girl.age <= valueAgeMax && girl.age >= valueAgeMin) {
                 console.log(girl);
                 return girl;
             }
         });
-        console.log(girlsFound);
+        console.log(girls);
 
         sliderFirstLine.innerHTML = '';
+        pageCount = Math.ceil(girls.length / onPageMax) - 1;
         for(let i = 0 + pageNow * onPageMax; i < onPageMax + pageNow * onPageMax; i++) {
-            sliderFirstLine.innerHTML += doList(girlsFound[i]);
+            sliderFirstLine.innerHTML += doList(girls[i]);
         }
 
         pageNow = 0;

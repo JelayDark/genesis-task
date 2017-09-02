@@ -89,11 +89,7 @@ function ready(fn) {
     }
 }
 
-// ready(function(){
-//   alert("DOM fully lo");
-// });
-
-var girls = [{
+var initialGirls = [{
     "gender": "Девушка",
     "name": "Кариночка",
     "photo": "karinochka",
@@ -266,9 +262,9 @@ var girls = [{
 }];
 
 ready(function () {
+    var girls = initialGirls;
     var sliderFirstLine = document.getElementsByClassName('list-result')[0];
     var pagNav = document.getElementsByClassName('pag-nav')[0];
-    // let heightOfSlider;
 
     var onPageMax = void 0; // количество фотографий на странице
     var maxPag = void 0; // количество элементов пгинации, видимых на экране
@@ -339,47 +335,23 @@ ready(function () {
     };
 
     var showList = function showList() {
+        console.log(girls);
         console.log(sliderFirstLine.offsetHeight);
         sliderFirstLine.innerHTML = '';
         for (var i = 0 + pageNow * onPageMax; i < onPageMax + pageNow * onPageMax; i++) {
             sliderFirstLine.innerHTML += doList(girls[i]);
         }
-        // console.log(sliderFirstLine.offsetHeight);
     };
 
     var changePage = function changePage(e) {
         if (e.target.classList.contains('page-prev')) {
             --pageNow < 0 ? pageNow = 0 : showList();
-            // if (maxPag > 0) {
-            //     document.getElementsByClassName('active')[0].classList.remove("active"); 
             pagDrow(pageNow);
-            // }
-            // sliderFirstLine.innerHTML = '';
-            // for(let i = 0 + pageNow * onPageMax; i < onPageMax + pageNow * onPageMax; i++) {
-            //     sliderFirstLine.innerHTML += doList(girls[i]);
-            // }
         } else if (e.target.classList.contains('page-next')) {
-            // document.getElementsByClassName('active')[0].classList.remove("active");
             ++pageNow > pageCount ? pageNow = pageCount : showList();
-
-            // if (maxPag > 0) {
-            //     document.getElementsByClassName('active')[0].classList.remove("active"); 
             pagDrow(pageNow);
-            // }
-            // document.getElementsByClassName('pn')[pageNow].classList.add("active");
-            // sliderFirstLine.innerHTML = '';
-            // for(let i = 0 + pageNow * onPageMax; i < onPageMax + pageNow * onPageMax; i++) {
-            //     sliderFirstLine.innerHTML += doList(girls[i]);
-            // }
         } else if (e.target.classList.contains('pn')) {
             e.target.innerHTML - 1 == pageNow ? false : pageNow = e.target.innerHTML - 1, showList(), pagDrow(pageNow);
-            // document.getElementsByClassName('active')[0].classList.remove("active");
-            // pageNow = e.target.innerHTML - 1;
-            // document.getElementsByClassName('pn')[pageNow].classList.add("active");
-            // sliderFirstLine.innerHTML = '';
-            // for(let i = 0 + pageNow * onPageMax; i < onPageMax + pageNow * onPageMax; i++) {
-            //     sliderFirstLine.innerHTML += doList(girls[i]);
-            // }
         }
     };
     showList();
@@ -424,17 +396,18 @@ ready(function () {
         var valueAgeMin = document.getElementById('year-min').value;
         var valueAgeMax = document.getElementById('year-max').value;
         console.log(valueCity, valueGender, valueAgeMax, valueAgeMin);
-        var girlsFound = girls.filter(function (girl) {
+        girls = girls.filter(function (girl) {
             if (valueGender === girl.gender && valueCity === girl.city && girl.age <= valueAgeMax && girl.age >= valueAgeMin) {
                 console.log(girl);
                 return girl;
             }
         });
-        console.log(girlsFound);
+        console.log(girls);
 
         sliderFirstLine.innerHTML = '';
+        pageCount = Math.ceil(girls.length / onPageMax) - 1;
         for (var i = 0 + pageNow * onPageMax; i < onPageMax + pageNow * onPageMax; i++) {
-            sliderFirstLine.innerHTML += doList(girlsFound[i]);
+            sliderFirstLine.innerHTML += doList(girls[i]);
         }
 
         pageNow = 0;
