@@ -206,22 +206,25 @@ ready(() => {
     let onPageMax; // количество фотографий на странице
     let maxPag; // количество элементов пгинации, видимых на экране
 
-    if(window.innerWidth < 480) {
-        onPageMax = 1;
-        maxPag = 0;
-    } else if (window.innerWidth < 768) {
-        onPageMax = 2;
-        maxPag = 3;
-    } else if (window.innerWidth < 1025) {
-        onPageMax = 6;
-        maxPag = 5;
-    } else {
-        onPageMax = 8;
-        maxPag = 7;
+    const maxGirls = () => { // функция заносит в переменные количество девушек, отображающееся на экране и количество кнопок пагинации с цифрами
+        if(window.innerWidth < 480) {
+            // return [1,0];
+            onPageMax = 1;
+            maxPag = 0;
+        } else if (window.innerWidth < 768) {
+            // return [2, 3];
+            onPageMax = 2;
+            maxPag = 3;
+        } else if (window.innerWidth < 1025) {
+            // return [6, 5];
+            onPageMax = 6;
+            maxPag = 5;
+        } else {
+            // return [8, 7];
+            onPageMax = 8;
+            maxPag = 7;
+        }
     }
-
-    let pageCount = Math.ceil(girls.length / onPageMax) - 1; //Высчитываем кол-во страниц
-    let pageNow = 0;
 
     const pagDrow = (thisnow) => { //функция отрисовки пагинации
         pagNav.innerHTML = '';
@@ -406,6 +409,11 @@ ready(() => {
     }
 
     //START
+
+    maxGirls();
+
+    let pageCount = Math.ceil(girls.length / onPageMax) - 1; //Высчитываем кол-во страниц
+    let pageNow = 0;
     
     showList(); //Отрисовываем окно найденок
     pagDrow(pageNow); //И к ним пагинация
@@ -413,19 +421,20 @@ ready(() => {
     document.addEventListener("click", changePage, false);
     
     window.onresize = () => { //Перерисовываю поиск при изменении размеров окна браузера
-        if(window.innerWidth < 480) {
-            onPageMax = 1;
-            maxPag = 0;
-        } else if (window.innerWidth < 768) {
-            onPageMax = 2;
-            maxPag = 3;
-        } else if (window.innerWidth < 1025) {
-            onPageMax = 6;
-            maxPag = 5;
-        } else {
-            onPageMax = 8;
-            maxPag = 7;
-        }
+        // if(window.innerWidth < 480) {
+        //     onPageMax = 1;
+        //     maxPag = 0;
+        // } else if (window.innerWidth < 768) {
+        //     onPageMax = 2;
+        //     maxPag = 3;
+        // } else if (window.innerWidth < 1025) {
+        //     onPageMax = 6;
+        //     maxPag = 5;
+        // } else {
+        //     onPageMax = 8;
+        //     maxPag = 7;
+        // }
+        maxGirls();
         showList();
         pageNow = 0;
         pagDrow(pageNow);
