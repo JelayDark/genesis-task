@@ -356,12 +356,13 @@ ready(() => {
         
         if(girls.length) {
             showList();
+            pageNow = 0;
+            pagDrow(pageNow);
         } else {
             girlSlider.innerHTML = "<div class='errorfound'>Никого не найдено. Для повторной попытки нажмите 'Новые'</div>";
+            pagNav.innerHTML = '';
         }
         
-        pageNow = 0;
-        pagDrow(pageNow);
 
     }
 

@@ -443,6 +443,12 @@
         .list-result {
             margin-top: 20px;
             @include forStretch;
+            .errorfound {
+                width: 100%;
+                text-align: left;
+                font-size: 20px;
+            }
+            
             .res-item {
                 float: none;
                 margin: 0;
