@@ -234,28 +234,44 @@
                     width: 180px;
                     height: 2px;
                     position: relative;
-                    .thumb {
+
+                    .range-selected {
                         position: absolute;
-                        width: 12px;
-                        height: 12px;
-                        border-radius: 50%;
-                        position: relative;
-                        left: 0px;
-                        top: -5px;
+                        top: 0;
+                        height: 2px;
                         background: $blue;
-                        cursor: pointer;
-                        &:hover {
-                            background: blue;
-                        }
-                        .years {
+                        left: 0;
+                        right: (156px - 25px);
+                        .thumb {
                             position: absolute;
-                            top: 13px;
-                            left: -2px;
+                            width: 12px;
+                            height: 12px;
+                            border-radius: 50%;
+                            // position: relative;
+                            // left: 0px;
+                            top: -5px;
+                            background: $blue;
+                            cursor: pointer;
+                            &:hover {
+                                background: blue;
+                            }
+                            .years {
+                                position: absolute;
+                                top: 13px;
+                                left: -2px;
+                            }
                         }
+
                     }
+
+                    #thumb-min {
+                        left: 0;
+                    }
+
                     #thumb-max {
-                        margin-top: -12px;
-                        left: 25px;
+                        // margin-top: -12px;
+                        right: 0;
+                        // left: 25px;
                     }
                 }
 

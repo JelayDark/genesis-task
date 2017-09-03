@@ -20,6 +20,7 @@ document.getElementById('year-min').setAttribute('value', mintext);
 let maxtext = parseInt(parseInt(getComputedStyle(thumbMax).left)/(rangeEnd/(MAX_YEAR-18))) + 18;
 thumbMax.children[0].innerHTML = maxtext;
 document.getElementById('year-max').setAttribute('value', maxtext);
+const rangeSelected = document.getElementsByClassName('range-selected')[0];
 
 thumbMin.onmousedown = (e) => {
     let thumbCoords = getCoords(thumbMin);
@@ -45,9 +46,9 @@ thumbMin.onmousedown = (e) => {
         }
 
         min = newLeft;
-        // mintext = parseInt(newLeft/(rangeEnd/(MAX_YEAR-18)));
         thumbMin.children[0].innerHTML = parseInt(newLeft/(rangeEnd/(MAX_YEAR-18))) + 18;
-        thumbMin.style.left = newLeft + 'px';
+        // thumbMin.style.left = newLeft + 'px';
+        rangeSelected.style.left = newLeft + 'px';
     }
 
     document.onmouseup = () => {
@@ -83,7 +84,8 @@ thumbMax.onmousedown = (e) => {
         max = newLeft;
         thumbMax.children[0].innerHTML = parseInt(newLeft/(rangeEnd/(MAX_YEAR-18))) + 18;
 
-        thumbMax.style.left = newLeft + 'px';
+        // thumbMax.style.left = newLeft + 'px';
+        rangeSelected.style.right = rangeEnd - newLeft + 'px';
     }
 
     document.onmouseup = () => {
