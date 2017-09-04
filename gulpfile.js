@@ -11,7 +11,7 @@ const uglify = require('gulp-uglifyjs');
 
 
 gulp.task('build-sass', () => {
-    return gulp.src('./styles/sass/main.scss')
+    return gulp.src(['./styles/sass/main.scss', './styles/sass/newmedia320.scss'])
             .pipe(sass().on('error', sass.logError))
             .pipe(cleanCSS())
             .pipe(rename({suffix: '.min'}))
